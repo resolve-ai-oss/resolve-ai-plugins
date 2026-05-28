@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "resolve": {
+      "type": "http",
+      "url": "https://rocket.resolve.ai/mcp/v2"
+    }
+  }
+}

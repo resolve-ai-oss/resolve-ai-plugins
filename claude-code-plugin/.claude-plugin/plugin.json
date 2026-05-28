@@ -1,0 +1,10 @@
+{
+  "name": "resolve",
+  "version": "0.2.0",
+  "description": "Use Resolve for investigations, incidents, and production context.",
+  "author": {
+    "name": "Resolve"
+  },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

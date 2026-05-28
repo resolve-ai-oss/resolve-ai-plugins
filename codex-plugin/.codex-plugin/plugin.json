@@ -1,0 +1,22 @@
+{
+  "name": "resolve",
+  "version": "0.2.0",
+  "description": "Use Resolve for investigations, incidents, and production context.",
+  "author": {
+    "name": "Resolve"
+  },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Resolve",
+    "shortDescription": "Investigate incidents with Resolve",
+    "developerName": "Resolve",
+    "category": "Developer Tools",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": [
+      "List recent Resolve investigations.",
+      "Get details for this Resolve investigation.",
+      "Ask Resolve about this production issue."
+    ]
+  }
+}

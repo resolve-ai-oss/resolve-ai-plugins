@@ -1,0 +1,14 @@
+{
+  "name": "resolve-everywhere",
+  "description": "Resolve marketplace for the Claude Code plugin.",
+  "owner": { "name": "Resolve" },
+  "plugins": [
+    {
+      "name": "resolve",
+      "source": "./claude-code-plugin",
+      "description": "Use Resolve for investigations, incidents, and production context.",
+      "version": "0.2.0",
+      "category": "Developer Tools"
+    }
+  ]
+}
