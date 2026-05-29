@@ -115,7 +115,7 @@ Seed a brand-new investigation from the **real recent alert** picked in beat 2: 
 
 ### 8 · Recap + toolbox
 
-One line recapping the loop, then hand over the controls — the skills they can run themselves: `resolve:overview`, `resolve:ask`, `resolve:investigate`, `resolve:alerts` / `resolve:investigations` / `resolve:chats`, `resolve:steer`, `resolve:apply-fix`.
+One line recapping the loop, then hand over the controls — the skills they can run themselves: `/resolve:overview`, `/resolve:ask`, `/resolve:investigate`, `/resolve:alerts` / `/resolve:investigations` / `/resolve:chats`, `/resolve:steer`, `/resolve:apply-fix`.
 
 ## Notes
 
