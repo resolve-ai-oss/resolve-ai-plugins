@@ -15,7 +15,7 @@ Eight skills your host agent can engage:
 - **apply-fix** — translate Resolve's findings into local code edits
 - **help-resolve** — intro and routing skill for new users
 
-Plus the underlying MCP tools (`get_investigation`, `start_investigation`, `ask`, `get_chat`, `list_chats`, `steer_investigation`, `read_file`, …) and `shared/bin/resolve-watch` for following a Resolve chat to completion asynchronously.
+Plus the underlying MCP tools (`get_investigation`, `start_investigation`, `ask`, `get_chat`, `list_chats`, `steer_investigation`, `read_file`, …), `shared/bin/resolve-watch` for following a Resolve chat to completion asynchronously, and `shared/bin/resolve-watch-investigation` for subscribing to an investigation's live trace stream (theory cards + evidence trail + phase).
 
 ## Prerequisites
 
@@ -70,3 +70,9 @@ The MCP transport authenticates with **OAuth** — on first connect the host (Cl
 `shared/bin/resolve-watch <chat_id> --watch-token <token>` follows a Resolve chat to completion. It streams Resolve's formatted output to stdout, creates a temporary state directory, prints `state_dir=<path>`, and writes structured snapshots to `<state_dir>/state.json`. It reads its base URL from `config.json` — the same host the MCP server connects to.
 
 The `--watch-token` is the short-lived, chat-scoped token returned by the `ask` tool (`watch_token` / the ready-to-run `watch_command`) — no API key needed. The host agent surfaces the command; you just run it.
+
+## Investigation subscriber
+
+`shared/bin/resolve-watch-investigation <investigation_id> --watch-token <token>` subscribes to an agent-teams investigation's live trace stream — the same data the UI's War Room renders. It streams theory-card updates, evidence-trail entries, and phase changes to stdout, and refreshes a structured `get_investigation` snapshot (report + theory cards + alerts + mitigations + status) to `<state_dir>/state.json` from time to time.
+
+The server owns termination: the subscription follows the investigation until it reaches `CONCLUDED` (plus a short linger to capture the trailing finalize pass), a 1-hour hard cap, or the process disconnects — reconnecting across the upstream's idle gaps in between. The `--watch-token` is the short-lived, investigation-scoped token returned by `start_investigation` / `steer_investigation` (`watch_token` / the ready-to-run `watch_command`) — no API key needed.

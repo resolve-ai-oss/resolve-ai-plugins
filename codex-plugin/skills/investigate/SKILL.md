@@ -48,3 +48,7 @@ Before starting fresh, **always check whether Resolve is already working on this
 6. Surface the returned canvas URL.
 
 After either path you're engaged with that investigation. Subsequent follow-ups use `ask`.
+
+## Following the investigation live (optional)
+
+`start_investigation` returns a `watch_token` (and a ready-to-run `watch_command`). When the user wants to follow progress, subscribe to the investigation's trace stream by launching the bundled `resolve-watch-investigation <investigation_id> --watch-token <watch_token>` in the background (per your host's background-process convention). It streams theory-card updates, evidence-trail entries, and phase changes to stdout, and refreshes a structured `get_investigation` snapshot to `<state_dir>/state.json` over the run. It exits when the investigation concludes (plus a short linger) or after a 1-hour cap. Fallback: call `get_investigation` on subsequent turns.
