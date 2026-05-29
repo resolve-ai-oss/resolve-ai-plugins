@@ -16,4 +16,5 @@ Bridges Resolve's production-side diagnosis to local code edits.
 4. **Optionally**, send a code-shaped question back to Resolve via `ask` for context you can't infer locally. Don't block on it — work in parallel.
 5. **Locate the relevant local code** with Grep/Read.
 6. **Propose the fix:** the theory addressed, the citations supporting it, the files being changed, why the change should work. Then implement.
-7. **Optionally** call `steer_investigation` with "Applied mitigation: <summary>" so the investigation records the fix.
+7. **Open a PR.** If a PR-creation skill is available, load and use it to open the pull request; otherwise follow the repo's normal PR flow. Land the work as a reviewable PR, not a dirty working tree.
+8. **Optionally** call `steer_investigation` with "Applied mitigation: <summary>" so the investigation records the fix.
