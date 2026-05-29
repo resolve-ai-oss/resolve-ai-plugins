@@ -1,20 +1,25 @@
 ---
 name: overview
-description: Get the big-picture view across all of Resolve — open investigations, recent alerts, in-flight chats. The zoomed-out workspace view, distinct from drilling into one investigation or chat. Use when the user asks "what's going on in Resolve", "any active investigations", "show me alerts", "recent chats with Resolve", "what investigations are open", or wants a snapshot of recent Resolve activity.
+description: Get the big-picture view across all of Resolve — open investigations, recent alerts, in-flight chats. Not for the status of a single investigation or chat.
 version: 0.1.0
 ---
 
 # Resolve Overview
 
-Show the user the big-picture view of what's happening across Resolve.
+## Tools
 
-## Tools to call
+- `list_investigations`
+- `list_alerts`
+- `list_chats`
 
-- `list_chats(investigation_id?)` — chats in flight (status: running/complete/errored). Pass an `investigation_id` if the user is focused on one; otherwise lists their recent standalone chats.
-- `list_investigations` — active investigations across the user's team with status/phase/severity.
-- `list_alerts` — recently-firing alerts.
+Fire in parallel. Don't infer scope from prior turns — overview means org-wide unless the user is explicit about narrowing.
 
-## Workflow
+## Output
 
-1. Call all three tools in a single parallel batch — they're independent, so don't wait for one before firing the next. Pass scope when the user has expressed one (e.g., they mentioned a specific investigation).
-2. Summarize in three sections — Investigations, Alerts, Chats — each with a count and one line per item carrying the fields that matter (e.g. investigations: title · phase · severity · URL; alerts: title · severity · whether auto-investigating · URL; chats: name · status · last updated). Keep each line tight, but don't collapse the list into bare counts — the user is scanning for which items need attention.
+Three sections — Investigations, Alerts, Chats — each with a count and one tight line per item carrying the fields that matter (title/name · status/phase · severity · URL).
+
+## Handoffs
+
+- Specific investigation → `resolve:investigate <id>`.
+- Specific chat → `get_chat` with the `chat_id`.
+- Just alerts → `resolve:alerts`. Just investigations → `resolve:investigations`. Just chats → `resolve:chats`.
