@@ -7,10 +7,6 @@ on:
         description: "Release tag to create, for example v0.1.0"
         required: true
         type: string
-      release_name:
-        description: "Optional release title. Defaults to the release tag."
-        required: false
-        type: string
 
 permissions:
   contents: write
@@ -25,15 +21,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Validate source branch
-        run: |
-          if [ "${GITHUB_REF_NAME}" != "staging" ]; then
-            echo "Run this workflow from the staging branch."
-            exit 1
-          fi
-
       - name: Check out staging
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           ref: staging
           fetch-depth: 0
@@ -46,8 +35,9 @@ jobs:
       - name: Validate release tag
         env:
           RELEASE_TAG: ${{ inputs.release_tag }}
+        shell: bash
         run: |
-          if ! printf '%s' "${RELEASE_TAG}" | grep -Eq '^v[0-9]+[.][0-9]+[.][0-9]+([-+][0-9A-Za-z.-]+)?$'; then
+          if [[ ! "${RELEASE_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?$ ]]; then
             echo "release_tag must look like v1.2.3, with optional semver suffix."
             exit 1
           fi
@@ -64,15 +54,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ inputs.release_tag }}
-          RELEASE_NAME: ${{ inputs.release_name }}
         run: |
           release_target_sha="$(git rev-parse HEAD)"
 
-          if [ -z "${RELEASE_NAME}" ]; then
-            RELEASE_NAME="${RELEASE_TAG}"
-          fi
-
           gh release create "${RELEASE_TAG}" \
-            --title "${RELEASE_NAME}" \
+            --title "${RELEASE_TAG}" \
             --target "${release_target_sha}" \
             --generate-notes
