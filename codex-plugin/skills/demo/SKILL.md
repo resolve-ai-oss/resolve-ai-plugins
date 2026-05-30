@@ -110,7 +110,7 @@ Take the root cause and the thread answer from beat 5 and turn them into a local
 
 ### 7 · Investigate from scratch (the climax) — opt-in
 
-Seed a brand-new investigation from the **real recent alert** picked in beat 2: compose a short markdown prompt from its title/labels, show it to the audience ("this fired ~<N> min ago — watch Resolve take it cold"), and only on explicit yes call `start_investigation`. Then stream it live per the `investigate` skill's `resolve-watch-investigation` contract — theory cards and the evidence trail forming in real time.
+Seed a brand-new investigation from the **real recent alert** picked in beat 2: compose a short markdown prompt from its title/labels, show it to the audience ("this fired ~<N> min ago — watch Resolve take it cold"), and only on explicit yes call `start_investigation`. Then stream it live per the `investigate` skill's `resolve-watch-investigation.sh` contract — theory cards and the evidence trail forming in real time.
 `▶ This starts a real investigation (uses org credits). Start it? Say "go".`
 
 ### 8 · Recap + toolbox

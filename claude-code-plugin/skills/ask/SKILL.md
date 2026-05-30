@@ -48,7 +48,7 @@ Default to whatever investigation/chat is currently in context:
 - Use the bundled watcher:
 
   ```sh
-  WATCHER="${CLAUDE_PLUGIN_ROOT}/bin/resolve-watch"
+  WATCHER="${CLAUDE_PLUGIN_ROOT}/bin/resolve-watch.sh"
   ```
 
 - Launch it in the background: `"$WATCHER" <chat_id> --watch-token <watch_token> [--investigation <id>] --message-id <message_id>` (add `--investigation <id>` for investigation-scoped chats). Pass `watch_token` and `message_id` from `ask`'s response — `watch_token` authenticates the watcher (no API key), and `--message-id` makes the stream emit only the new turn, not a full replay of prior history. It streams Resolve's response as human-readable text to stdout, creates a temporary state directory, prints `state_dir=<path>`, and writes two structured snapshots to `<state_dir>/state.json` — one before the stream opens and one when it closes. Spawn with `Bash(run_in_background: true)`. Safe to run multiple in parallel for different chats.

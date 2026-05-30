@@ -37,7 +37,7 @@ Format the enriched message as the user's question first, then a brief `## Local
 
 - Surface the canvas URL.
 - Expect a **Mode A 4-block diagnosis** (starts with `**What's failing:**` and includes Evidence / Likely cause / Suggested next step) when the user asked about a failure, or a **Mode B field tour** when they asked about config fields. Surface this verbatim — don't paraphrase the structured blocks.
-- Launch a background watcher (`resolve-watch <chat_id> --message-id <message_id>`) to stream Resolve's response. Same pattern as `resolve:ask`.
+- Launch a background watcher (`resolve-watch.sh <chat_id> --message-id <message_id>`) to stream Resolve's response. Same pattern as `resolve:ask`.
 
 ## Out of scope for this skill
 
