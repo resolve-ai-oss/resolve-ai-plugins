@@ -41,4 +41,4 @@ Effects surface via:
 
 - The activity timeline — re-read via `read_file` on the timeline path from `get_investigation`.
 - Updated theories on next `get_investigation`.
-- **Live, if the user wants to watch the effect land:** `steer_investigation` returns a `watch_token`. Subscribe to the trace stream by launching the bundled `resolve-watch-investigation.sh <investigation_id> --watch-token <watch_token>` in the background (see the `investigate` skill's "Following the investigation live" section). The theory and trail updates the steer triggers land there as they happen.
+- **Live, if the user wants to watch the effect land:** `steer_investigation` returns a ready-to-run `stream_command` — a self-contained `curl`. Run it in the background (see the `investigate` skill's "Following the investigation live" section) and the theory and trail updates the steer triggers land in its stdout as they happen.

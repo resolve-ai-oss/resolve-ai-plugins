@@ -45,15 +45,7 @@ Default to whatever investigation/chat is currently in context:
 `ask` is non-blocking — it returns immediately, then Resolve takes seconds to minutes to respond.
 
 - Surface the canvas URL.
-- Use the bundled watcher:
-
-  ```sh
-  WATCHER="${CLAUDE_PLUGIN_ROOT}/bin/resolve-watch.sh"
-  ```
-
-- Launch it in the background: `"$WATCHER" <chat_id> --watch-token <watch_token> [--investigation <id>] --message-id <message_id>` (add `--investigation <id>` for investigation-scoped chats). Pass `watch_token` and `message_id` from `ask`'s response — `watch_token` authenticates the watcher (no API key), and `--message-id` makes the stream emit only the new turn, not a full replay of prior history. It streams Resolve's response as human-readable text to stdout, creates a temporary state directory, prints `state_dir=<path>`, and writes two structured snapshots to `<state_dir>/state.json` — one before the stream opens and one when it closes. Spawn with `Bash(run_in_background: true)`. Safe to run multiple in parallel for different chats.
-- **For the live transcript** (mid-flight progress, what Resolve is currently saying or which tool it's running), read the watcher's stdout via your host's background-process output API (Claude Code: `BashOutput`).
-- **For the structured chat state** (full message list, tool history, status), read `state.json` from the watcher's state directory. Note: mid-flight it reflects the pre-stream seed; only after the watcher exits does it contain the final state.
-- The watcher exits when Resolve's current turn completes (`status` becomes `complete` or `errored`). If the host re-engages automatically on background process exit, surface the final state then; otherwise surface it on the next user-driven turn. Exit code 0 = success, 1 = errored.
-- Fallback if the watcher fails to spawn: call `get_chat` on subsequent turns.
-- For multiple chats in flight, `list_chats` (or each chat's `state.json`) shows what's settled.
+- **Follow the response (primary).** `ask` returns a ready-to-run `stream_command` — a self-contained `curl` that streams the reply (needs only `curl`, no bundled binary). Run it verbatim in the background with `Bash(run_in_background: true)`; do not block the turn on it. Safe to run several in parallel for different chats.
+- **For the live transcript** (mid-flight progress, what Resolve is currently saying or which tool it's running), read the command's stdout via `BashOutput`. The stream ends with `[done]` when the turn succeeds or `[error: …]` if it failed — judge the outcome from that marker, not the process exit code (a non-zero exit just means the stream connection dropped). If in doubt, confirm with `get_chat`.
+- **For the final state**, call `get_chat` once the chat has finished — it returns the same conversation in condensed form (full message list, tool history, status). Use it also if the `stream_command` can't be run.
+- For multiple chats in flight, `list_chats` shows what's settled.
