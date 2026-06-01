@@ -11,22 +11,19 @@ Wraps `list_investigations`.
 
 ## Arguments
 
-If `$ARGUMENTS` is non-empty, parse it into filter intent and call `list_investigations` with what you extract.
+If `$ARGUMENTS` is non-empty, translate it into `list_investigations` filters.
 
-If `$ARGUMENTS` is empty, call `list_investigations` with no parameters (defaults to last 24h, no filters, limit 50). Only ask the user to narrow if the result set is overwhelming.
+If `$ARGUMENTS` is empty, call `list_investigations` with the tool defaults. Only ask the user to narrow if the result set is overwhelming.
 
-## Filter surface
+## Filter Intent
 
-Map common phrasings to these parameters:
+Map common phrasings to the right filter family:
 
-- **`time_range`** — `last_24h` (default) / `last_7d` / `last_30d` / `custom`. For `custom`, pass `from_iso` (required, ISO 8601) and optionally `to_iso` (defaults to now). Use this when the user says "last week", "this month", a specific date range, etc.
-- **`team_id`** — scope to a specific team. Omit for the caller's full org.
-- **`run_type`** — `AUTO` (alert-triggered) or `MANUAL` (human-started). Use when the user distinguishes "auto-investigations" vs "investigations I/we started".
-- **`use_case`** — `ALERT` / `CHAT_INVESTIGATION` / `INCIDENT`. Use when the user references the source: "investigations from alerts", "chat-started ones", "incidents".
-- **`triage_only: true`** — return only investigations running in triage-only mode.
-- **`limit`** — default 50, hard ceiling 500.
-
-Filters compose with AND semantics. Results come sorted newest-first by `created_at`.
+- **Time** — "today", "last week", explicit date ranges, or "since deploy".
+- **Ownership** — team, service, or alert context.
+- **Run origin** — auto-investigations vs human-started investigations.
+- **Source** — alert-driven, chat-started, incident, or triage-only.
+- **Volume** — use a limit when the user asks for "top", "latest N", or a short list.
 
 ## Output
 
@@ -45,4 +42,4 @@ After listing, offer the next step: `resolve:investigate <id>` to load one, or `
 - "Show me everything happening in Resolve" — broader snapshot → `resolve:overview`.
 - "Open this one" — drill in → `resolve:investigate <id>`.
 - "Show me firing alerts" — alerts-focused view → `resolve:alerts`.
-- "What chats are in flight?" — `list_chats` directly, or `resolve:overview` for the unified view.
+- "What chats are in flight?" — `resolve:chats`, or `resolve:overview` for the unified view.

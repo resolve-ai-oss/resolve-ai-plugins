@@ -42,10 +42,9 @@ Default to whatever investigation/chat is currently in context:
 
 ## After asking
 
-`ask` is non-blocking — it returns immediately, then Resolve takes seconds to minutes to respond.
+Call `ask` with the selected scope and enriched message, then surface the returned URL.
 
-- Surface the canvas URL.
-- **Follow the response (primary).** `ask` returns a ready-to-run `stream_command` — a self-contained `curl` that streams the reply (needs only `curl`, no bundled binary). Run it verbatim in the background with `Bash(run_in_background: true)`; do not block the turn on it. Safe to run several in parallel for different chats.
-- **For the live transcript** (mid-flight progress, what Resolve is currently saying or which tool it's running), read the command's stdout via `BashOutput`. The stream ends with `[done]` when the turn succeeds or `[error: …]` if it failed — judge the outcome from that marker, not the process exit code (a non-zero exit just means the stream connection dropped). If in doubt, confirm with `get_chat`.
-- **For the final state**, call `get_chat` once the chat has finished — it returns the same conversation in condensed form (full message list, tool history, status). Use it also if the `stream_command` can't be run.
-- For multiple chats in flight, `list_chats` shows what's settled.
+If the response includes a `stream_command`, follow it using Claude Code's background command mechanism:
+
+- Run the command verbatim with `Bash(run_in_background: true)`; do not block the turn on it.
+- Read live progress from stdout via `BashOutput`.

@@ -51,4 +51,4 @@ After either path you're engaged with that investigation. Subsequent follow-ups 
 
 ## Following the investigation live (optional)
 
-`start_investigation` — and `get_investigation` on a still-running investigation — return a ready-to-run `stream_command`: a self-contained `curl` that streams the investigation's live trace (theory-card updates, evidence-trail entries, phase changes) to stdout. When the user wants to follow progress, run that `stream_command` as a long-running background process (Claude Code: `Bash` with run_in_background; Codex: a long-running `exec_command`, not shell backgrounding). It needs only `curl` — no bundled binary. If the connection drops before the investigation concludes, just re-run it to resume. For the condensed final state, call `get_investigation` on a later turn.
+If the response includes a `stream_command` and the user wants to follow progress, run it with the host's long-running command mechanism.

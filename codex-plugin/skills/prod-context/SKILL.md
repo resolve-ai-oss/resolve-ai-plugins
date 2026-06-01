@@ -79,14 +79,12 @@ block. Examples of instantiation:
   Any open investigations or active alerts on `<area>`, and what's the normal error rate/latency
   so I can tell if the fix actually helps?"
 
-Then **hand this message to the `ask` skill** — it owns sending, scoping (existing
-investigation/chat vs standalone), streaming the reply, and surfacing the canvas URL. Don't
-re-implement any of that here.
+Send the composed question via `resolve:ask`.
 
 ## 4. Fire and continue
 
-The `ask` skill runs non-blocking. **Proceed with planning/implementation immediately** — don't
-stall the user waiting on Resolve. When its reply lands:
+Continue with planning/implementation unless the user explicitly wants to wait. When Resolve's
+reply lands:
 
 - Summarize what Resolve returned in 2–4 bullets.
 - **Adjust the approach** and call out the adjustment explicitly — e.g. it's a high-traffic hot

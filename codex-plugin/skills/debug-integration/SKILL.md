@@ -17,9 +17,9 @@ If `$ARGUMENTS` is non-empty, treat it as the user's question and proceed.
 
 If `$ARGUMENTS` is empty (skill invoked without a clear question), ask the user once what's wrong with which integration. Treat their next reply as the base message.
 
-## Composing the message
+## Composing the ask
 
-Send the user's question to Resolve via `ask`. The agent will discover the target integration internally (`list_integrations` → `get_integration_details`) and invoke its own integration-debug skill to apply the diagnostic discipline (kubectl scoping rules, structured output formats).
+Compose one message for `resolve:ask`. The agent will discover the target integration internally (`list_integrations` → `get_integration_details`) and invoke its own integration-debug skill to apply the diagnostic discipline (kubectl scoping rules, structured output formats).
 
 You don't need to specify the integration instance id — describing the integration by name and symptom is sufficient. The agent will resolve which instance the user means.
 
@@ -29,15 +29,11 @@ Enrich the base message with conversation context **that directly supports debug
 - Recent changes (deploys, config edits) that might be tied to the failure
 - Health-check output the user pasted, if any
 
-Format the enriched message as the user's question first, then a brief `## Local context` block with only the relevant items.
+Format the enriched message as the user's question first, then a brief `## Local context` block with only the relevant items. Hand that single composed message to `resolve:ask`; it owns sending, scoping, streaming, and canvas URL handling.
 
 ## After asking
 
-`ask` is non-blocking. The agent takes seconds to minutes to respond.
-
-- Surface the canvas URL.
-- Expect a **Mode A 4-block diagnosis** (starts with `**What's failing:**` and includes Evidence / Likely cause / Suggested next step) when the user asked about a failure, or a **Mode B field tour** when they asked about config fields. Surface this verbatim — don't paraphrase the structured blocks.
-- Launch a background watcher (`resolve-watch.sh <chat_id> --message-id <message_id>`) to stream Resolve's response. Same pattern as `resolve:ask`.
+Once `resolve:ask` has produced its streamed or settled answer, expect a **Mode A 4-block diagnosis** (starts with `**What's failing:**` and includes Evidence / Likely cause / Suggested next step) when the user asked about a failure, or a **Mode B field tour** when they asked about config fields. Surface this verbatim — don't paraphrase the structured blocks.
 
 ## Out of scope for this skill
 

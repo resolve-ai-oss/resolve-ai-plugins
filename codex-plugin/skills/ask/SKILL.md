@@ -42,10 +42,9 @@ Default to whatever investigation/chat is currently in context:
 
 ## After asking
 
-`ask` is non-blocking — it returns immediately, then Resolve takes seconds to minutes to respond.
+Call `ask` with the selected scope and enriched message, then surface the returned URL.
 
-- Surface the canvas URL.
-- **Follow the response (primary).** `ask` returns a ready-to-run `stream_command` — a self-contained `curl` that streams the reply (needs only `curl`). Run it verbatim as a long-running Codex command: call `functions.exec_command` with the `stream_command`, `yield_time_ms: 1000`, `sandbox_permissions: "require_escalated"`, a short network justification, and an appropriate `max_output_tokens`. It calls Resolve's stream endpoint directly, so default sandbox networking may fail with a `curl` network error. Do not use shell backgrounding (`&`, `nohup`, zsh job control); Codex's command session is the background primitive.
-- **For the live transcript**, read the output returned by `functions.exec_command`. If it returns a `session_id`, poll that session with `functions.write_stdin` using empty `chars` until the command exits. The stream ends with `[done]` when the turn succeeds or `[error: …]` if it failed — judge the outcome from that marker, not the process exit code. If in doubt, confirm with `get_chat`.
-- **For the final state**, call `get_chat` once the chat has finished — it returns the same conversation in condensed form. Use it also if the `stream_command` can't be run.
-- For multiple chats in flight, `list_chats` shows what's settled.
+If the response includes a `stream_command`, follow it using Codex's long-running command mechanism:
+
+- Run the command with `functions.exec_command`.
+- Request network escalation if sandbox networking blocks the stream.
