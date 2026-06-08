@@ -1,8 +1,11 @@
 ---
+# Copyright 2026 Cloud Data Labs, Inc.
+# SPDX-License-Identifier: Apache-2.0
 name: chats
 description: List recent Resolve chats. Use when the user asks "show me my chats", "what chats are in flight", "any chats running", "chats from last week", or wants a focused chat list (separate from a full overview snapshot).
 version: 0.1.0
 argument-hint: <optional time range, e.g. "last 7 days">
+license: Apache-2.0
 ---
 
 # List Resolve Chats

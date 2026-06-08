@@ -1,8 +1,11 @@
 ---
+# Copyright 2026 Cloud Data Labs, Inc.
+# SPDX-License-Identifier: Apache-2.0
 name: investigate
 description: Have Resolve run a root-cause investigation — open an existing canvas, or start a new one. Use when the user pastes a Resolve URL, names an investigation ID, references an alert, or describes a problem — phrases like "investigate X", "look into Y", "have Resolve check Z", "start an investigation", "rca this", or "root cause this".
 version: 0.1.0
 argument-hint: <resolve-url | investigation-id | problem-description>
+license: Apache-2.0
 ---
 
 # Investigate with Resolve

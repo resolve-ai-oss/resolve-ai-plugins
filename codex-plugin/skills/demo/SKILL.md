@@ -1,8 +1,11 @@
 ---
+# Copyright 2026 Cloud Data Labs, Inc.
+# SPDX-License-Identifier: Apache-2.0
 name: demo
 description: Run a guided, presenter-led tour of Resolve using the connected org's live data — surface the environment, resume a chat, fire several in parallel, drill a real RCA with its evidence and a live thread, then investigate something from scratch. Use when someone wants to demo Resolve, give a tour, or show a new user what it can do — phrases like "demo Resolve", "give me a tour", "walk them through Resolve", "show me what Resolve can do", "demo this to <person>".
 version: 0.1.0
 argument-hint: [optional emphasis, or "start"]
+license: Apache-2.0
 ---
 
 # Demo Resolve
@@ -13,7 +16,7 @@ A presenter-led, checkpointed walkthrough of Resolve using **the connected org's
 
 Every beat stands alone — stop anywhere and it's still a complete demo.
 
-This skill orchestrates with direct tool calls and its own narration. For the streaming beats it follows the watcher contracts already documented in the `ask` and `investigate` skills rather than restating the host-specific mechanics here.
+This skill orchestrates with direct tool calls and its own narration. For the streaming beats it follows the `stream_command` streaming already documented in the `ask` and `investigate` skills rather than restating the host-specific mechanics here.
 
 ## Arguments
 
@@ -24,7 +27,7 @@ If `$ARGUMENTS` carries an emphasis (e.g. "focus on logs", "keep it short"), bia
 Establish the mode at the start and honor it for **every** command, every beat:
 
 - **Auto** (default — today's behavior): _you_ run each command via the tools, pausing at checkpoints for the presenter's "go" or to let them pick an option.
-- **Manual** (hand-me-the-commands): you do **not** execute the beat's action. Compose the **full command with its args/message filled in** and present it for the presenter to type themselves, then **stop and wait** for them to run it before moving on. You may still run read-only setup (e.g. `overview`) so the commands you hand over carry real IDs/values, but every action command (`ask`, `investigate`, `steer`, `apply-fix`) is theirs to enter. Because they're invoking the real skills, those skills' own run/format behavior (watchers, citations, canvas URLs) applies as-is.
+- **Manual** (hand-me-the-commands): you do **not** execute the beat's action. Compose the **full command with its args/message filled in** and present it for the presenter to type themselves, then **stop and wait** for them to run it before moving on. You may still run read-only setup (e.g. `overview`) so the commands you hand over carry real IDs/values, but every action command (`ask`, `investigate`, `steer`, `apply-fix`) is theirs to enter. Because they're invoking the real skills, those skills' own run/format behavior (streaming, citations, canvas URLs) applies as-is.
 
 Select via `$ARGUMENTS` (`auto` / `manual`); if unset, ask once at pre-flight.
 
@@ -77,12 +80,12 @@ Call `list_investigations`, `list_alerts` (with `limit: 20`), `list_chats` in pa
 
 ### 3 · Resume a chat
 
-Take the existing chat picked in beat 2 and **send a follow-up to it** — `ask` with that `chat_id` (include `investigation_id` if it's investigation-scoped). The point: chats persist, you resume a real prior conversation instead of starting cold. Stream the reply per the `ask` skill's watcher contract (background watcher + `--message-id` so only the new turn streams).
+Take the existing chat picked in beat 2 and **send a follow-up to it** — `ask` with that `chat_id` (include `investigation_id` if it's investigation-scoped). The point: chats persist, you resume a real prior conversation instead of starting cold. Stream the reply per the `ask` skill — run its returned `stream_command`, which scopes to the new turn.
 `▶ Send the follow-up to "<chat name>"? Say "go".` ← consent before sending
 
 ### 4 · Many in parallel
 
-Fire **two or three** questions concurrently, each with its own background watcher, streaming side by side. The point: Resolve isn't one-at-a-time. (The `ask` skill blesses parallel watchers.)
+Fire **two or three** questions concurrently, each streaming its own `stream_command` in the background, side by side. The point: Resolve isn't one-at-a-time. (The `ask` skill blesses parallel streams.)
 
 Use **concrete, service-scoped** asks, not vague aggregates — vague ones make the agent guess time ranges and stall. Good shapes (substitute a real service from beat 2):
 
@@ -99,7 +102,7 @@ On the RCA picked in beat 2:
 
 1. **Read it** (no consent — read-only): `get_investigation` → narrate status/phase, the top theory and its confidence.
 2. **Get the evidence:** `read_file` a citation path from that theory to surface the raw telemetry behind the claim — the actual query or log lines the agent used. This is the trust moment: every conclusion traces to real data.
-3. **Open a thread on it** (consent — sends a message): an investigation-scoped `ask` (pass `investigation_id`, no `chat_id`) that asks a sharp follow-up about the finding, then stream the answer per the `ask` watcher contract (`--investigation <id>`). Shows you can _converse with a specific RCA_, not just read it.
+3. **Open a thread on it** (consent — sends a message): an investigation-scoped `ask` (pass `investigation_id`, no `chat_id`) that asks a sharp follow-up about the finding, then stream the answer per the `ask` skill — run its returned `stream_command`. Shows you can _converse with a specific RCA_, not just read it.
    `▶ Open a thread on this RCA with "<question>"? Say "go".`
 
 ### 6 · Apply the fix in code — close the loop with a PR (opt-in)
@@ -110,7 +113,7 @@ Take the root cause and the thread answer from beat 5 and turn them into a local
 
 ### 7 · Investigate from scratch (the climax) — opt-in
 
-Seed a brand-new investigation from the **real recent alert** picked in beat 2: compose a short markdown prompt from its title/labels, show it to the audience ("this fired ~<N> min ago — watch Resolve take it cold"), and only on explicit yes call `start_investigation`. Then stream it live per the `investigate` skill's `resolve-watch-investigation.sh` contract — theory cards and the evidence trail forming in real time.
+Seed a brand-new investigation from the **real recent alert** picked in beat 2: compose a short markdown prompt from its title/labels, show it to the audience ("this fired ~<N> min ago — watch Resolve take it cold"), and only on explicit yes call `start_investigation`. Then stream it live per the `investigate` skill — run its returned `stream_command` — theory cards and the evidence trail forming in real time.
 `▶ This starts a real investigation (uses org credits). Start it? Say "go".`
 
 ### 8 · Recap + toolbox

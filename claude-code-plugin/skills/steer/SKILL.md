@@ -1,8 +1,11 @@
 ---
+# Copyright 2026 Cloud Data Labs, Inc.
+# SPDX-License-Identifier: Apache-2.0
 name: steer
 description: Steer a Resolve investigation by sending it a new finding, hypothesis, or directive to redirect it. Use when the user wants to promote a local observation back to Resolve — phrases like "tell Resolve I found X", "steer this investigation", "send Resolve this observation", or "promote this back to Resolve".
 version: 0.1.0
 argument-hint: <message>
+license: Apache-2.0
 ---
 
 # Steer Investigation

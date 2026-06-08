@@ -1,8 +1,11 @@
 ---
+# Copyright 2026 Cloud Data Labs, Inc.
+# SPDX-License-Identifier: Apache-2.0
 name: investigations
 description: List recent Resolve investigations. Use when the user asks "show me investigations", "list my team's investigations", "investigations from last week", "what auto-investigations ran today", "any manual investigations this month", or wants a focused investigations view (separate from a full overview snapshot).
 version: 0.1.0
 argument-hint: <optional filter description>
+license: Apache-2.0
 ---
 
 # List Resolve Investigations

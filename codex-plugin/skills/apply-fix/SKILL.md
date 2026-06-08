@@ -1,7 +1,10 @@
 ---
+# Copyright 2026 Cloud Data Labs, Inc.
+# SPDX-License-Identifier: Apache-2.0
 name: apply-fix
 description: Turn a Resolve investigation's root-cause findings into code changes in your local repo. Use when the user wants to translate findings into code changes — phrases like "fix this based on Resolve", "implement Resolve's mitigation", "apply the fix from this investigation", "remediate the root cause Resolve found", or wants to write code to address a theory Resolve identified.
 version: 0.1.0
+license: Apache-2.0
 ---
 
 # Apply Fix from Resolve Findings

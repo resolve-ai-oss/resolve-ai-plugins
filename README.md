@@ -1,3 +1,8 @@
+<!--
+Copyright 2026 Cloud Data Labs, Inc.
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Resolve Everywhere Plugin
 
 [Resolve](https://resolve.ai) is an AI DevOps investigation platform: structured RCAs on production incidents, alert correlation, theory cards with citations, and chat-driven follow-up. This plugin wires Resolve into Claude Code and Codex over MCP so you can open investigations, ask follow-up questions, apply fixes locally, and steer in-flight investigations without leaving your editor.
@@ -15,26 +20,19 @@ Eight skills your host agent can engage:
 - **apply-fix** — translate Resolve's findings into local code edits
 - **help-resolve** — intro and routing skill for new users
 
-Plus the underlying MCP tools (`get_investigation`, `start_investigation`, `ask`, `get_chat`, `list_chats`, `steer_investigation`, `read_file`, …), `shared/bin/resolve-watch.sh` for following a Resolve chat to completion asynchronously, and `shared/bin/resolve-watch-investigation.sh` for subscribing to an investigation's live trace stream (theory cards + evidence trail + phase). Node equivalents without the `.sh` suffix are also included.
+Plus the underlying MCP tools (`get_investigation`, `start_investigation`, `ask`, `get_chat`, `list_chats`, `steer_investigation`, `read_file`, …). Tools that follow live progress return a self-contained `curl` as `stream_command` in their response — the host agent runs it to stream an investigation's trace (theory cards + evidence trail + phase) or a chat to completion. No bundled watcher binaries.
 
 ## Prerequisites
 
-- Bash + `curl` on `PATH` for the default `.sh` watcher scripts, or Node 20+ for the non-`.sh` watcher equivalents
 - A Claude Code or Codex install
 - A Resolve API token (see [Authentication](#authentication))
 
 ## Configuration
 
-Two pieces, set once per Resolve deployment:
+Set the `url` field in the `.mcp.json` for whichever host you use to `<your-resolve-host>/mcp/v2`:
 
-1. **Host MCP URL.** Set the `url` field in the `.mcp.json` for whichever host you use to `<your-resolve-host>/mcp/v2`:
-   - Claude Code: `claude-code-plugin/.mcp.json`
-   - Codex: `codex-plugin/.mcp.json`
-2. **Watcher base URL.** Set `baseUrl` in `shared/config.json` to the same `<your-resolve-host>`:
-   ```json
-   { "baseUrl": "https://rocket.resolve.ai" }
-   ```
-   The watcher reads this to construct its REST calls (`<baseUrl>/api/resolve-mcp/v2/...`, a different path on the same host than the MCP transport).
+- Claude Code: `claude-code-plugin/.mcp.json`
+- Codex: `codex-plugin/.mcp.json`
 
 Restart Claude Code / Codex after editing so it reloads the MCP config.
 
@@ -63,16 +61,8 @@ Then restart Claude Code. `/mcp` will show `resolve` connected.
 
 ## Authentication
 
-The MCP transport authenticates with **OAuth** — on first connect the host (Claude Code / Codex) runs OAuth discovery against the Resolve deployment in `config.json` and prompts you to sign in. No API key to generate or export. Identity and scoping come from that sign-in.
+The MCP transport authenticates with **OAuth** — on first connect the host (Claude Code / Codex) runs OAuth discovery against the Resolve deployment in the host's `.mcp.json` and prompts you to sign in. No API key to generate or export. Identity and scoping come from that sign-in.
 
-## Watcher
+## Following live progress
 
-`shared/bin/resolve-watch.sh <chat_id> --watch-token <token>` follows a Resolve chat to completion. It streams Resolve's formatted output to stdout, creates a temporary state directory, prints `state_dir=<path>`, and writes structured snapshots to `<state_dir>/state.json`. It reads its base URL from `config.json` — the same host the MCP server connects to. `shared/bin/resolve-watch` is the Node equivalent.
-
-The `--watch-token` is the short-lived, chat-scoped token returned by the `ask` tool (`watch_token` / the ready-to-run `watch_command`) — no API key needed. The host agent surfaces the command; you just run it.
-
-## Investigation subscriber
-
-`shared/bin/resolve-watch-investigation.sh <investigation_id> --watch-token <token>` subscribes to an agent-teams investigation's live trace stream — the same data the UI's War Room renders. It streams theory-card updates, evidence-trail entries, and phase changes to stdout, and refreshes a structured `get_investigation` snapshot (report + theory cards + alerts + mitigations + status) to `<state_dir>/state.json` from time to time. `shared/bin/resolve-watch-investigation` is the Node equivalent.
-
-The server owns termination: the subscription follows the investigation until it reaches `CONCLUDED` (plus a short linger to capture the trailing finalize pass), a 1-hour hard cap, or the process disconnects — reconnecting across the upstream's idle gaps in between. The `--watch-token` is the short-lived, investigation-scoped token returned by `start_investigation` / `steer_investigation` (`watch_token` / the ready-to-run `watch_command`) — no API key needed.
+`ask`, `start_investigation`, and `steer_investigation` are long-running. Each returns a `stream_command` — a self-contained `curl` against the Resolve stream endpoint — which the host agent runs as a background process to follow the reply or the investigation's live trace (theory cards, evidence trail, phase) to completion. The server owns termination: an investigation stream follows until `CONCLUDED` (plus a short linger for the trailing finalize pass), a 1-hour hard cap, or disconnect. The command carries a short-lived, scoped watch token, so no API key is needed.

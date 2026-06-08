@@ -1,8 +1,11 @@
 ---
+# Copyright 2026 Cloud Data Labs, Inc.
+# SPDX-License-Identifier: Apache-2.0
 name: debug-integration
 description: Figure out why a Resolve integration is failing or quiet, or explain what its settings do. Use when the user mentions a Resolve integration failing or wants to understand its configuration — phrases like "debug my <X> integration", "what's wrong with my Datadog", "why is my Tempo quiet", "my satellite isn't sending data", "explain the fields on my Grafana integration", or "what does <field> do on my <integration>". Read-only.
 version: 0.1.0
 argument-hint: <integration-name or question>
+license: Apache-2.0
 ---
 
 # Debug a Resolve integration

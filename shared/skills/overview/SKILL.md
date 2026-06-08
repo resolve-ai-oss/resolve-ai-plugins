@@ -1,7 +1,10 @@
 ---
+# Copyright 2026 Cloud Data Labs, Inc.
+# SPDX-License-Identifier: Apache-2.0
 name: overview
 description: Get the big-picture view across all of Resolve — open investigations, recent alerts, in-flight chats. Not for the status of a single investigation or chat.
 version: 0.1.0
+license: Apache-2.0
 ---
 
 # Resolve Overview
