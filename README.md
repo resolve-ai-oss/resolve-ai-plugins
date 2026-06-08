@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Resolve Everywhere Plugin
 
-[Resolve](https://resolve.ai) is an AI DevOps investigation platform: structured RCAs on production incidents, alert correlation, theory cards with citations, and chat-driven follow-up. This plugin wires Resolve into Claude Code and Codex over MCP so you can open investigations, ask follow-up questions, apply fixes locally, and steer in-flight investigations without leaving your editor.
+[Resolve](https://resolve.ai) is an AI DevOps investigation platform: structured RCAs on production incidents, alert correlation, theory cards with citations, and chat-driven follow-up. This plugin wires Resolve into Claude Code, Codex, and Cursor over MCP so you can open investigations, ask follow-up questions, apply fixes locally, and steer in-flight investigations without leaving your editor.
 
 ## What's included
 
@@ -24,17 +24,18 @@ Plus the underlying MCP tools (`get_investigation`, `start_investigation`, `ask`
 
 ## Prerequisites
 
-- A Claude Code or Codex install
+- A Claude Code, Codex, or Cursor install
 - A Resolve API token (see [Authentication](#authentication))
 
 ## Configuration
 
-Set the `url` field in the `.mcp.json` for whichever host you use to `<your-resolve-host>/mcp/v2`:
+Set the `url` field in the MCP config for whichever host you use to `<your-resolve-host>/mcp/v2`:
 
 - Claude Code: `claude-code-plugin/.mcp.json`
 - Codex: `codex-plugin/.mcp.json`
+- Cursor: `cursor-plugin/mcp.json`
 
-Restart Claude Code / Codex after editing so it reloads the MCP config.
+Restart Claude Code / Codex / Cursor after editing so it reloads the MCP config.
 
 ## Codex
 
@@ -59,9 +60,22 @@ claude plugin install resolve@resolve-everywhere
 
 Then restart Claude Code. `/mcp` will show `resolve` connected.
 
+## Cursor
+
+Cursor loads the plugin from the `cursor-plugin/` directory. It implements the same Agent Skills standard, so the skills are reused as-is and the MCP server is auto-detected from `cursor-plugin/mcp.json`.
+
+Install one of two ways:
+
+- **Team / local marketplace.** Point Cursor at this repo as a plugin marketplace (Dashboard → Settings → Plugins, or symlink into `~/.cursor/plugins/local/resolve` for local testing). The repo-root `.cursor-plugin/marketplace.json` exposes `resolve` from `cursor-plugin`.
+- **Public Cursor Marketplace.** Submit the public repo at `cursor.com/marketplace/publish`, then users get a one-click "Add to Cursor" + OAuth.
+
+Restart Cursor after installing. The `resolve` MCP server will appear in Settings → MCP, and the skills are invocable from Agent chat (type `/` to run one explicitly, or let the agent pick them up by relevance).
+
 ## Authentication
 
-The MCP transport authenticates with **OAuth** — on first connect the host (Claude Code / Codex) runs OAuth discovery against the Resolve deployment in the host's `.mcp.json` and prompts you to sign in. No API key to generate or export. Identity and scoping come from that sign-in.
+The MCP transport authenticates with **OAuth** — on first connect the host (Claude Code / Codex / Cursor) runs OAuth discovery against the Resolve deployment in the host's MCP config and prompts you to sign in. No API key to generate or export. Identity and scoping come from that sign-in.
+
+> **Cursor OAuth redirect.** Cursor uses a single fixed OAuth callback for all MCP servers: `cursor://anysphere.cursor-mcp/oauth/callback`. If the Resolve deployment whitelists redirect URIs (rather than relying purely on Dynamic Client Registration), this callback must be registered on the Resolve OAuth app.
 
 ## Following live progress
 

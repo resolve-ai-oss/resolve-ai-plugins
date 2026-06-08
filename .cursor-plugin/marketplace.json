@@ -1,0 +1,16 @@
+{
+  "name": "resolve-everywhere",
+  "owner": { "name": "Resolve" },
+  "metadata": {
+    "description": "Resolve marketplace for the Cursor plugin."
+  },
+  "plugins": [
+    {
+      "name": "resolve",
+      "source": "cursor-plugin",
+      "description": "Use Resolve for investigations, incidents, and production context.",
+      "version": "0.2.0",
+      "category": "Developer Tools"
+    }
+  ]
+}
