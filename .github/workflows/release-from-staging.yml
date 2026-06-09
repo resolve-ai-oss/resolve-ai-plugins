@@ -24,16 +24,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3
+        id: plugin-publisher-token
+        with:
+          app-id: ${{ vars.RESOLVE_PLUGIN_PUBLISH_APP_ID }}
+          private-key: ${{ secrets.RESOLVE_PLUGIN_PUBLISH__PRIVATE_KEY }}
+          owner: resolve-ai-oss
+          repositories: resolve-plugin-base
+
       - name: Check out staging
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           ref: staging
           fetch-depth: 0
+          token: ${{ steps.plugin-publisher-token.outputs.token }}
 
       - name: Configure Git
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "resolve-plugin-publisher[bot]"
+          git config user.email "resolve-plugin-publisher[bot]@users.noreply.github.com"
 
       - name: Validate release tag
         env:
@@ -55,7 +64,7 @@ jobs:
 
       - name: Create GitHub release
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ steps.plugin-publisher-token.outputs.token }}
           RELEASE_TAG: ${{ inputs.release_tag }}
         run: |
           release_target_sha="$(git rev-parse HEAD)"
