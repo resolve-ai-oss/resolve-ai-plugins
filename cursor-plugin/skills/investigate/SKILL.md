@@ -52,6 +52,6 @@ Before starting fresh, **always check whether Resolve is already working on this
 
 After either path you're engaged with that investigation. Subsequent follow-ups use `ask`.
 
-## Following the investigation live (optional)
+## Following the investigation live
 
-If the response includes a `stream_command` and the user wants to follow progress, run it with the host's long-running command mechanism.
+After starting a new investigation, default to following it: run the returned `stream_command` with the host's long-running command mechanism and relay notable progress as it arrives. For an existing in-flight investigation, follow only if the user asks.
