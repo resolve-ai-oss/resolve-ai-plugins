@@ -11,6 +11,13 @@
       "description": "Use Resolve for investigations, incidents, and production context.",
       "version": "0.2.0",
       "category": "Developer Tools"
+    },
+    {
+      "name": "resolve-admin",
+      "source": "cursor-plugin-admin",
+      "description": "Admin/operator skills for managing Resolve integrations (create, debug, satellite configs). Requires the resolve plugin — reuses its MCP connection.",
+      "version": "0.1.0",
+      "category": "Developer Tools"
     }
   ]
 }

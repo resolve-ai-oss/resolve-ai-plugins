@@ -12,7 +12,7 @@ license: Apache-2.0
 
 Use when the user wants Resolve to diagnose or explain one of their integrations. The Resolve agent has internal tools to list integrations, load schema + redacted values + last health check + satellite scope, and (for satellite-backed integrations) read pod logs scoped to the right namespace.
 
-This skill is read-only. To create or mutate integrations, see `resolve:create-integration`. To edit satellite Helm values, see `resolve:satellite-configs`.
+This skill is read-only. To create or mutate integrations, see `resolve-admin:create-integration`. To edit satellite Helm values, see `resolve-admin:satellite-configs`.
 
 ## Arguments
 
@@ -40,9 +40,9 @@ Once `resolve:ask` has produced its streamed or settled answer, expect a **Mode 
 
 ## Out of scope for this skill
 
-- **Creating** an integration → `resolve:create-integration`.
-- **Editing** an integration's connection config → currently the REST API (see `resolve:create-integration` for the link) or the Resolve UI. Agent-mediated updates are not yet supported.
-- **Editing satellite Helm values** → `resolve:satellite-configs`.
-- **Investigating production incidents** that aren't specifically about an integration → `resolve:investigate`.
+- **Creating** an integration → `resolve-admin:create-integration`.
+- **Editing** an integration's connection config → currently the REST API (see `resolve-admin:create-integration` for the link) or the Resolve UI. Agent-mediated updates are not yet supported.
+- **Editing satellite Helm values** → `resolve-admin:satellite-configs`.
+- **Investigating production incidents** that aren't specifically about an integration → Resolve's investigate workflow (the `resolve` plugin, if installed).
 
 If the user's question doesn't fit integration debugging, redirect to the right skill and stop.
