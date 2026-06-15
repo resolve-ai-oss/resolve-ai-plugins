@@ -38,11 +38,11 @@ Summarize compactly:
 - Always surface canvas URLs — they're the user's drill-in path.
 - Preserve any `[label](path)` citations verbatim.
 
-After listing, offer the next step: `resolve:investigate <id>` to load one, or `resolve:ask` if the user wants to follow up on a specific investigation.
+After listing, offer the next step: `resolve-ai:investigate <id>` to load one, or `resolve-ai:ask` if the user wants to follow up on a specific investigation.
 
 ## Handoffs
 
-- "Show me everything happening in Resolve" — broader snapshot → `resolve:overview`.
-- "Open this one" — drill in → `resolve:investigate <id>`.
-- "Show me firing alerts" — alerts-focused view → `resolve:alerts`.
-- "What chats are in flight?" — `resolve:chats`, or `resolve:overview` for the unified view.
+- "Show me everything happening in Resolve" — broader snapshot → `resolve-ai:overview`.
+- "Open this one" — drill in → `resolve-ai:investigate <id>`.
+- "Show me firing alerts" — alerts-focused view → `resolve-ai:alerts`.
+- "What chats are in flight?" — `resolve-ai:chats`, or `resolve-ai:overview` for the unified view.

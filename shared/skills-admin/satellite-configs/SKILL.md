@@ -17,7 +17,7 @@ This is a **local-file-editing** skill — it doesn't call Resolve MCP tools. Th
 1. Find the `values.yaml` (typically `helm/values/satellite/<env>/values.yaml` in the customer's infra repo, or wherever they manage their Helm releases).
 2. Make the edit.
 3. Apply via `helm upgrade` (the user handles deploy — you don't run it).
-4. Verify the satellite picks up the change by asking Resolve (`resolve-admin:debug-integration`) to inspect the satellite-backed integration.
+4. Verify the satellite picks up the change by asking Resolve (`resolve-ai-admin:debug-integration`) to inspect the satellite-backed integration.
 
 ## Arguments
 
@@ -41,7 +41,7 @@ integrations:
       # ... other fields per the integration's connection schema
 ```
 
-To learn the exact `connection` schema for a given integration, ask Resolve via `resolve:ask` ("What fields does the Tempo connection schema require?"). The agent will return the schema with field descriptions.
+To learn the exact `connection` schema for a given integration, ask Resolve via `resolve-ai:ask` ("What fields does the Tempo connection schema require?"). The agent will return the schema with field descriptions.
 
 For integration keys + example shapes, see the auto-generated catalog at `docs/Integrations.md` in the devops-copilot repo (or the customer-facing equivalent).
 
@@ -53,7 +53,7 @@ Satellite pods need to reach (a) Resolve cloud and (b) the customer's internal s
 - `satellite.tls.*` — custom CA bundle for internal HTTPS endpoints with private certs
 - `satellite.networkPolicy.*` — NetworkPolicies allowing the satellite namespace to reach customer-side services
 
-Confirm specifics by asking Resolve via `resolve:ask` ("What proxy/TLS knobs does the satellite chart support?") — the agent has the chart's schema.
+Confirm specifics by asking Resolve via `resolve-ai:ask` ("What proxy/TLS knobs does the satellite chart support?") — the agent has the chart's schema.
 
 ### Setting environment-specific overrides
 
@@ -66,13 +66,13 @@ Use per-environment values files (`helm/values/satellite/<env>/values.yaml`) and
 3. **Propose** the edit as a diff. Don't apply blindly; let the user confirm.
 4. **Apply** the edit via `Edit` once confirmed.
 5. **Hand off** to the user for `helm upgrade` (they own the deploy step).
-6. **Verify** post-deploy by handing off to `resolve-admin:debug-integration` to inspect the resulting integration.
+6. **Verify** post-deploy by handing off to `resolve-ai-admin:debug-integration` to inspect the resulting integration.
 
 ## Out of scope
 
-- **Creating SaaS (direct-to-cloud) integrations** → `resolve-admin:create-integration` (uses REST API, not satellite values).
-- **Diagnosing a failing satellite integration** → `resolve-admin:debug-integration` (uses Resolve's agent with satellite log access).
+- **Creating SaaS (direct-to-cloud) integrations** → `resolve-ai-admin:create-integration` (uses REST API, not satellite values).
+- **Diagnosing a failing satellite integration** → `resolve-ai-admin:debug-integration` (uses Resolve's agent with satellite log access).
 - **Running `helm upgrade`** — that's the user's responsibility. You propose the edit; they deploy.
 - **Editing Resolve's hosted infrastructure** — the satellite chart is the customer's; you're editing their files, not Resolve's.
 
-If the user wants to _create_ an integration and isn't sure whether it goes via values.yaml or REST, hand off to `resolve-admin:create-integration` to disambiguate.
+If the user wants to _create_ an integration and isn't sure whether it goes via values.yaml or REST, hand off to `resolve-ai-admin:create-integration` to disambiguate.

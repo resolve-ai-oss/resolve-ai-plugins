@@ -23,6 +23,6 @@ Three sections — Investigations, Alerts, Chats — each with a count and one t
 
 ## Handoffs
 
-- Specific investigation → `resolve:investigate <id>`.
+- Specific investigation → `resolve-ai:investigate <id>`.
 - Specific chat → `get_chat` with the `chat_id`.
-- Just alerts → `resolve:alerts`. Just investigations → `resolve:investigations`. Just chats → `resolve:chats`.
+- Just alerts → `resolve-ai:alerts`. Just investigations → `resolve-ai:investigations`. Just chats → `resolve-ai:chats`.

@@ -35,7 +35,7 @@ Select via `$ARGUMENTS` (`auto` / `manual`); if unset, ask once at pre-flight.
 
 - **Prospect-facing** (plain prose): the lines you screen-share — clean, jargon-light, short.
 - **Presenter cue** (prefix `▶`): control prompts addressed to _you_, not the audience. End every beat with a cue that previews exactly what the next step will do, e.g. `▶ Next: open a real RCA and pull the raw telemetry behind its top theory. Say "go", pick from the menu, or tell me what to show.`
-- **Command tag** (prefix `▷`): name the slash command for each beat's capability. In **auto** mode it's just the label, so the audience learns it — `▷ Run it yourself: /resolve:overview`. In **manual** mode it's the _full runnable command with composed args_, and you stop and wait for the presenter to enter it — e.g. `▷ Type this: /resolve:ask Follow-up: of the error spikes in svc-analysis, which one is most worth acting on first?`. Mapping (args from each skill's own `argument-hint`): surface → `/resolve:overview` (focused lists `/resolve:alerts`, `/resolve:investigations`, `/resolve:chats`); resume / ask / thread / parallel → `/resolve:ask <message>`; redirect a live investigation → `/resolve:steer <message>`; drill or start an RCA → `/resolve:investigate <url-or-id | problem>`; apply a fix → `/resolve:apply-fix`.
+- **Command tag** (prefix `▷`): name the slash command for each beat's capability. In **auto** mode it's just the label, so the audience learns it — `▷ Run it yourself: /resolve-ai:overview`. In **manual** mode it's the _full runnable command with composed args_, and you stop and wait for the presenter to enter it — e.g. `▷ Type this: /resolve-ai:ask Follow-up: of the error spikes in svc-analysis, which one is most worth acting on first?`. Mapping (args from each skill's own `argument-hint`): surface → `/resolve-ai:overview` (focused lists `/resolve-ai:alerts`, `/resolve-ai:investigations`, `/resolve-ai:chats`); resume / ask / thread / parallel → `/resolve-ai:ask <message>`; redirect a live investigation → `/resolve-ai:steer <message>`; drill or start an RCA → `/resolve-ai:investigate <url-or-id | problem>`; apply a fix → `/resolve-ai:apply-fix`.
 
 ## Pacing — light checkpoints
 
@@ -51,20 +51,20 @@ On launch, don't address the audience yet. Settle the **run mode** (auto vs manu
 
 One breath on Resolve: it's an AI SRE for your production incidents. Start with the big picture, then the two primitives everything centers on.
 
-**The big picture** — `/resolve:overview` shows investigations, recent alerts, and in-flight chats at a glance. (`/resolve:alerts` for just the firing feed that auto-triggers investigations; `/resolve:help-resolve` to get oriented.)
+**The big picture** — `/resolve-ai:overview` shows investigations, recent alerts, and in-flight chats at a glance. (`/resolve-ai:alerts` for just the firing feed that auto-triggers investigations; `/resolve-ai:help-resolve` to get oriented.)
 
 **Investigations** — structured root-cause workspaces (theories, cited evidence, mitigations, tied to the triggering alert):
 
-- `/resolve:investigate` — open an existing RCA or start a new one
-- `/resolve:investigations` — list recent investigations
-- `/resolve:ask` — ask a question or open a thread on an investigation
-- `/resolve:steer` — redirect a running investigation with a new finding
-- `/resolve:apply-fix` — turn its findings into a code change, right here
+- `/resolve-ai:investigate` — open an existing RCA or start a new one
+- `/resolve-ai:investigations` — list recent investigations
+- `/resolve-ai:ask` — ask a question or open a thread on an investigation
+- `/resolve-ai:steer` — redirect a running investigation with a new finding
+- `/resolve-ai:apply-fix` — turn its findings into a code change, right here
 
 **Chats** — standalone conversations with Resolve — ask anything about your environment:
 
-- `/resolve:ask` — start or continue a standalone chat
-- `/resolve:chats` — list recent chats
+- `/resolve-ai:ask` — start or continue a standalone chat
+- `/resolve-ai:chats` — list recent chats
 
 ### 2 · Surface — the environment
 
@@ -108,7 +108,7 @@ On the RCA picked in beat 2:
 ### 6 · Apply the fix in code — close the loop with a PR (opt-in)
 
 Take the root cause and the thread answer from beat 5 and turn them into a local change — Resolve diagnosed it in production; now write the fix in the editor. Run the `apply-fix` flow: read the theory and its citations, locate the owning code with Grep/Read, **propose** the change (theory addressed, files touched, why it works), implement on a "go", then **open a PR** — loading a PR-creation skill if one's available — so the loop ends at a reviewable pull request, not just a dirty tree. If the root cause is infra/config that doesn't live in this repo, say so and show the change you _would_ make rather than forcing an edit.
-`▷ Run it yourself: /resolve:apply-fix`
+`▷ Run it yourself: /resolve-ai:apply-fix`
 `▶ This edits local code and opens a PR. Apply the fix? Say "go" — or skip.`
 
 ### 7 · Investigate from scratch (the climax) — opt-in
@@ -118,7 +118,7 @@ Seed a brand-new investigation from the **real recent alert** picked in beat 2: 
 
 ### 8 · Recap + toolbox
 
-One line recapping the loop, then hand over the controls — the skills they can run themselves: `/resolve:overview`, `/resolve:ask`, `/resolve:investigate`, `/resolve:alerts` / `/resolve:investigations` / `/resolve:chats`, `/resolve:steer`, `/resolve:apply-fix`.
+One line recapping the loop, then hand over the controls — the skills they can run themselves: `/resolve-ai:overview`, `/resolve-ai:ask`, `/resolve-ai:investigate`, `/resolve-ai:alerts` / `/resolve-ai:investigations` / `/resolve-ai:chats`, `/resolve-ai:steer`, `/resolve-ai:apply-fix`.
 
 ## Notes
 

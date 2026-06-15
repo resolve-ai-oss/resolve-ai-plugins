@@ -1,11 +1,11 @@
 {
-  "name": "resolve-everywhere",
+  "name": "resolve-ai-plugins",
   "interface": {
-    "displayName": "Resolve Everywhere"
+    "displayName": "Resolve AI"
   },
   "plugins": [
     {
-      "name": "resolve",
+      "name": "resolve-ai",
       "source": {
         "source": "local",
         "path": "./codex-plugin"
@@ -17,7 +17,7 @@
       "category": "Developer Tools"
     },
     {
-      "name": "resolve-admin",
+      "name": "resolve-ai-admin",
       "source": {
         "source": "local",
         "path": "./codex-plugin-admin"

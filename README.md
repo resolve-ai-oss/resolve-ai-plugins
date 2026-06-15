@@ -3,7 +3,7 @@ Copyright 2026 Cloud Data Labs, Inc.
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# Resolve Everywhere Plugin
+# Resolve AI Plugin
 
 [Resolve](https://resolve.ai) is an AI DevOps investigation platform: structured RCAs on production incidents, alert correlation, theory cards with citations, and chat-driven follow-up. This plugin wires Resolve into Claude Code, Codex, and Cursor over MCP so you can open investigations, ask follow-up questions, apply fixes locally, and steer in-flight investigations without leaving your editor.
 
@@ -22,17 +22,17 @@ Eight skills your host agent can engage:
 
 Plus the underlying MCP tools (`get_investigation`, `start_investigation`, `ask`, `get_chat`, `list_chats`, `steer_investigation`, `read_file`, …). Tools that follow live progress return a self-contained `curl` as `stream_command` in their response — the host agent runs it to stream an investigation's trace (theory cards + evidence trail + phase) or a chat to completion. No bundled watcher binaries.
 
-## Companion plugin: `resolve-admin`
+## Companion plugin: `resolve-ai-admin`
 
-This marketplace ships a second plugin for admin/operator workflows around **managing integrations** — kept out of the customer `resolve` plugin so day-to-day users aren't shown integration-CRUD skills they can't act on. Three skills:
+This marketplace ships a second plugin for admin/operator workflows around **managing integrations** — kept out of the customer `resolve-ai` plugin so day-to-day users aren't shown integration-CRUD skills they can't act on. Three skills:
 
 - **create-integration** — route a new data source to the right path (SaaS REST API, satellite, or OAuth/UI flow)
 - **debug-integration** — diagnose or explain a failing/quiet integration (read-only)
 - **satellite-configs** — edit a satellite's Helm `values.yaml` for satellite-backed integrations and networking
 
-`resolve-admin` declares **no MCP server of its own** — it rides on the `resolve` plugin's connection (the same `/mcp/v2`) and hands off to that plugin's `resolve:ask` skill, so **it requires the `resolve` plugin installed alongside it.** Its skills are authored in `shared/skills-admin/` and synced into `claude-code-plugin-admin/`, `codex-plugin-admin/`, and `cursor-plugin-admin/`.
+`resolve-ai-admin` declares **no MCP server of its own** — it rides on the `resolve-ai` plugin's connection (the same `/mcp/v2`) and hands off to that plugin's `resolve-ai:ask` skill, so **it requires the `resolve-ai` plugin installed alongside it.** Its skills are authored in `shared/skills-admin/` and synced into `claude-code-plugin-admin/`, `codex-plugin-admin/`, and `cursor-plugin-admin/`.
 
-Install alongside the customer plugin, e.g. `claude plugin install resolve@resolve-everywhere` then `claude plugin install resolve-admin@resolve-everywhere` (likewise for `codex plugin install`).
+Install alongside the customer plugin, e.g. `claude plugin install resolve-ai@resolve-ai-plugins` then `claude plugin install resolve-ai-admin@resolve-ai-plugins` (likewise for `codex plugin install`).
 
 ## Prerequisites
 
@@ -47,7 +47,7 @@ Set the `url` field in the MCP config for whichever host you use to `<your-resol
 - Codex: `codex-plugin/.mcp.json`
 - Cursor: `cursor-plugin/mcp.json`
 
-The companion `resolve-admin` plugin has no MCP config of its own — it reuses the `resolve` plugin's server, so there's nothing extra to point at a host.
+The companion `resolve-ai-admin` plugin has no MCP config of its own — it reuses the `resolve-ai` plugin's server, so there's nothing extra to point at a host.
 
 Restart Claude Code / Codex / Cursor after editing so it reloads the MCP config.
 
@@ -58,10 +58,10 @@ Register this directory as a Codex marketplace and install:
 ```sh
 codex plugin marketplace add <path-to-this-plugin>
 # restart Codex, then:
-codex plugin install resolve@resolve-everywhere
+codex plugin install resolve-ai@resolve-ai-plugins
 ```
 
-The marketplace appears as `resolve-everywhere`.
+The marketplace appears as `resolve-ai-plugins`.
 
 ## Claude Code
 
@@ -69,7 +69,7 @@ Register this directory as a Claude Code marketplace and install:
 
 ```sh
 claude plugin marketplace add <path-to-this-plugin> --scope user
-claude plugin install resolve@resolve-everywhere
+claude plugin install resolve-ai@resolve-ai-plugins
 ```
 
 Then restart Claude Code. `/mcp` will show `resolve` connected.
@@ -80,7 +80,7 @@ Cursor loads the plugin from the `cursor-plugin/` directory. It implements the s
 
 Install one of two ways:
 
-- **Team / local marketplace.** Point Cursor at this repo as a plugin marketplace (Dashboard → Settings → Plugins, or symlink into `~/.cursor/plugins/local/resolve` for local testing). The repo-root `.cursor-plugin/marketplace.json` exposes `resolve` from `cursor-plugin`.
+- **Team / local marketplace.** Point Cursor at this repo as a plugin marketplace (Dashboard → Settings → Plugins, or symlink into `~/.cursor/plugins/local/resolve` for local testing). The repo-root `.cursor-plugin/marketplace.json` exposes `resolve-ai` from `cursor-plugin`.
 - **Public Cursor Marketplace.** Submit the public repo at `cursor.com/marketplace/publish`, then users get a one-click "Add to Cursor" + OAuth.
 
 Restart Cursor after installing. The `resolve` MCP server will appear in Settings → MCP, and the skills are invocable from Agent chat (type `/` to run one explicitly, or let the agent pick them up by relevance).

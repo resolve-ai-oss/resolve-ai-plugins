@@ -50,6 +50,6 @@ If the list is long, group by `alert_rule_key` or a salient label and offer to n
 
 ## Handoffs
 
-- "Show me everything happening in Resolve" — broader than just alerts → `resolve:overview`.
-- "Open the investigation for this alert" — use the alert's `investigation_id` directly → `resolve:investigate <investigation_id>`.
-- "Tell Resolve about this alert" — promote a finding into that investigation → `resolve:steer`.
+- "Show me everything happening in Resolve" — broader than just alerts → `resolve-ai:overview`.
+- "Open the investigation for this alert" — use the alert's `investigation_id` directly → `resolve-ai:investigate <investigation_id>`.
+- "Tell Resolve about this alert" — promote a finding into that investigation → `resolve-ai:steer`.

@@ -64,7 +64,7 @@ Make it exact. Gather a tight bundle — be ruthlessly selective, no transcript 
   the branch and recent subjects.
 
 Put the concrete question(s) first, then a short `## What I'm about to change` block, and send via
-`resolve:ask`. For example:
+`resolve-ai:ask`. For example:
 
 - New feature/endpoint → _operational profile_ + _telemetry coverage_: "About to add `<X>` to
   `<service>`. How much traffic/usage does this area see, is it a hot path, and what telemetry

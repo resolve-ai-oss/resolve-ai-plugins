@@ -13,9 +13,9 @@ Resolve (resolve.ai) is an AI DevOps investigation platform. It runs structured 
 
 When the user mentions production incidents, alerts, active investigations, or asks about Resolve, this skill engages. From here:
 
-- User pasted a Resolve URL or named an investigation → `resolve:investigate` to load and summarize it.
-- User described a problem with no existing URL → `resolve:investigate` to compose a prompt and (with confirmation) kick off a new investigation.
-- User wants to translate findings to local code changes → `resolve:apply-fix`.
+- User pasted a Resolve URL or named an investigation → `resolve-ai:investigate` to load and summarize it.
+- User described a problem with no existing URL → `resolve-ai:investigate` to compose a prompt and (with confirmation) kick off a new investigation.
+- User wants to translate findings to local code changes → `resolve-ai:apply-fix`.
 
 ## Response Style
 

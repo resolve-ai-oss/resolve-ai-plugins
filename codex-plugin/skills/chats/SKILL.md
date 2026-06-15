@@ -28,6 +28,6 @@ If `$ARGUMENTS` is non-empty, parse it into filter intent. Empty → call with d
 ## Handoffs
 
 - Read what Resolve said on a chat → `get_chat` with the `chat_id`.
-- Send a new message in a chat → `resolve:ask` with the `chat_id`.
-- Investigations view → `resolve:investigations`.
-- Alerts view → `resolve:alerts`.
+- Send a new message in a chat → `resolve-ai:ask` with the `chat_id`.
+- Investigations view → `resolve-ai:investigations`.
+- Alerts view → `resolve-ai:alerts`.

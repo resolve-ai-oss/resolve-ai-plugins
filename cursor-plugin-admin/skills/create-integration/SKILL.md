@@ -12,11 +12,11 @@ license: Apache-2.0
 
 Use when the user wants to add a new integration instance. There are three paths, and the right one depends on what kind of integration:
 
-| Integration type                                                                       | Path                                                                          |
-| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| **Direct-to-cloud SaaS** (Datadog, Grafana Cloud, New Relic, AWS, etc.)                | Resolve REST API or UI                                                        |
-| **Satellite-backed** (Tempo, Loki, Prometheus on a satellite, etc.)                    | Edit the satellite's Helm values.yaml — see `resolve-admin:satellite-configs` |
-| **OAuth / app-install** (Slack, MS Teams, GitHub, GitHub Enterprise, MCP integrations) | Dedicated UI flow in the Resolve console                                      |
+| Integration type                                                                       | Path                                                                             |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **Direct-to-cloud SaaS** (Datadog, Grafana Cloud, New Relic, AWS, etc.)                | Resolve REST API or UI                                                           |
+| **Satellite-backed** (Tempo, Loki, Prometheus on a satellite, etc.)                    | Edit the satellite's Helm values.yaml — see `resolve-ai-admin:satellite-configs` |
+| **OAuth / app-install** (Slack, MS Teams, GitHub, GitHub Enterprise, MCP integrations) | Dedicated UI flow in the Resolve console                                         |
 
 The agent **cannot** create the integration for the user directly (no agent-mediated CRUD yet). This skill's job is to identify the right path and point the user at it.
 
@@ -30,7 +30,7 @@ If `$ARGUMENTS` is empty, ask the user which integration they want to set up. Tr
 
 ### Step 1 — Identify the integration class
 
-If you're not sure which class the integration falls into, ask Resolve with `resolve:ask` ("Is the <X> integration direct-to-cloud, satellite-backed, or OAuth-flow?"). The agent can answer from its knowledge of Resolve's integration catalog.
+If you're not sure which class the integration falls into, ask Resolve with `resolve-ai:ask` ("Is the <X> integration direct-to-cloud, satellite-backed, or OAuth-flow?"). The agent can answer from its knowledge of Resolve's integration catalog.
 
 ### Step 2 — Pick the right path
 
@@ -47,9 +47,9 @@ curl -sS -X POST https://<your-resolve-host>/api/v1/integrations \
   }' | jq .
 ```
 
-The exact `connection` schema depends on the integration. To learn it, ask Resolve via `resolve:ask` ("What fields does the Datadog connection schema require?") — the agent will load the schema for you. Encrypted fields (apiKey, password, etc.) will be redacted on subsequent reads.
+The exact `connection` schema depends on the integration. To learn it, ask Resolve via `resolve-ai:ask` ("What fields does the Datadog connection schema require?") — the agent will load the schema for you. Encrypted fields (apiKey, password, etc.) will be redacted on subsequent reads.
 
-**Satellite-backed:** Hand off to `resolve-admin:satellite-configs`. Integrations like Tempo, Loki, Prometheus, Kubernetes, DNS-tap, and Temporal must be created from a running satellite, not via REST.
+**Satellite-backed:** Hand off to `resolve-ai-admin:satellite-configs`. Integrations like Tempo, Loki, Prometheus, Kubernetes, DNS-tap, and Temporal must be created from a running satellite, not via REST.
 
 **OAuth / app-install:** Tell the user to use the Resolve UI:
 
@@ -61,10 +61,10 @@ These can't be created via REST because they need token exchange or app-installa
 
 ### Step 3 — Verify after creating
 
-Once the integration is created, hand off to `resolve-admin:debug-integration` and prompt the user to run a health check ("ask Resolve to debug my <X> integration"). Mode A diagnosis will confirm whether the connection is healthy.
+Once the integration is created, hand off to `resolve-ai-admin:debug-integration` and prompt the user to run a health check ("ask Resolve to debug my <X> integration"). Mode A diagnosis will confirm whether the connection is healthy.
 
 ## Out of scope
 
 - **Editing an existing instance's connection** — currently REST `PATCH /api/v1/integrations/:id`. Agent-mediated updates are not yet supported.
 - **Removing an integration** — REST `DELETE /api/v1/integrations/:id` (soft delete). Agent-mediated deletes are not yet supported.
-- **Investigating a misconfigured integration** → `resolve-admin:debug-integration`.
+- **Investigating a misconfigured integration** → `resolve-ai-admin:debug-integration`.

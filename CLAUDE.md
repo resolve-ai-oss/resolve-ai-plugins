@@ -3,7 +3,7 @@ Copyright 2026 Cloud Data Labs, Inc.
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# Resolve Everywhere Plugin Guidance
+# Resolve AI Plugin Guidance
 
 ## Skill vs Tool Description Boundary
 
@@ -39,9 +39,9 @@ Example boundary:
 
 ## Shared Skill Workflow
 
-This marketplace publishes two plugins. The customer-facing `resolve` plugin's skills are authored under `shared/skills` and copied into the `claude-code-plugin`, `codex-plugin`, and `cursor-plugin` host directories. The companion `resolve-admin` plugin's skills (integration create/debug, satellite-configs) are authored under `shared/skills-admin` and copied into the `*-plugin-admin` host directories. `resolve-admin` declares no MCP server of its own — it rides on the `resolve` plugin's `/mcp/v2` connection and hands off to `resolve:ask`, so it requires the `resolve` plugin installed alongside it.
+This marketplace publishes two plugins. The customer-facing `resolve-ai` plugin's skills are authored under `shared/skills` and copied into the `claude-code-plugin`, `codex-plugin`, and `cursor-plugin` host directories. The companion `resolve-ai-admin` plugin's skills (integration create/debug, satellite-configs) are authored under `shared/skills-admin` and copied into the `*-plugin-admin` host directories. `resolve-ai-admin` declares no MCP server of its own — it rides on the `resolve-ai` plugin's `/mcp/v2` connection and hands off to `resolve-ai:ask`, so it requires the `resolve-ai` plugin installed alongside it.
 
-- Edit shared skills first (`shared/skills` for `resolve`, `shared/skills-admin` for `resolve-admin`).
+- Edit shared skills first (`shared/skills` for `resolve-ai`, `shared/skills-admin` for `resolve-ai-admin`).
 - Run `pnpm run sync:resolve-everywhere-plugin` after changing shared skills.
 - Run `pnpm run check:resolve-everywhere-plugin` before pushing.
 - Do not hand-edit generated host copies unless the sync script marks them host-owned.
