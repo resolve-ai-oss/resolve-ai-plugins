@@ -30,7 +30,7 @@ jobs:
           app-id: ${{ vars.RESOLVE_PLUGIN_PUBLISH_APP_ID }}
           private-key: ${{ secrets.RESOLVE_PLUGIN_PUBLISH__PRIVATE_KEY }}
           owner: resolve-ai-oss
-          repositories: resolve-plugin-base
+          repositories: resolve-ai-plugins
 
       - name: Check out staging
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
