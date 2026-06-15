@@ -1,20 +1,22 @@
 {
   "name": "resolve-ai-plugins",
-  "description": "Resolve marketplace for the Claude Code plugin.",
-  "owner": { "name": "Resolve" },
+  "description": "Resolve AI marketplace for the Claude Code plugin.",
+  "owner": {
+    "name": "Resolve AI",
+    "email": "help@resolve.ai",
+    "url": "https://resolve.ai"
+  },
   "plugins": [
     {
       "name": "resolve-ai",
       "source": "./claude-code-plugin",
       "description": "Use Resolve for investigations, incidents, and production context.",
-      "version": "0.2.0",
       "category": "Developer Tools"
     },
     {
       "name": "resolve-ai-admin",
       "source": "./claude-code-plugin-admin",
       "description": "Admin/operator skills for managing Resolve integrations (create, debug, satellite configs). Requires the resolve-ai plugin — reuses its MCP connection.",
-      "version": "0.1.0",
       "category": "Developer Tools"
     }
   ]

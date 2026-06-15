@@ -1,22 +1,24 @@
 {
   "name": "resolve-ai-plugins",
-  "owner": { "name": "Resolve" },
+  "owner": {
+    "name": "Resolve AI",
+    "email": "help@resolve.ai",
+    "url": "https://resolve.ai"
+  },
   "metadata": {
-    "description": "Resolve marketplace for the Cursor plugin."
+    "description": "Resolve AI marketplace for the Cursor plugin."
   },
   "plugins": [
     {
       "name": "resolve-ai",
       "source": "cursor-plugin",
       "description": "Use Resolve for investigations, incidents, and production context.",
-      "version": "0.2.0",
       "category": "Developer Tools"
     },
     {
       "name": "resolve-ai-admin",
       "source": "cursor-plugin-admin",
       "description": "Admin/operator skills for managing Resolve integrations (create, debug, satellite configs). Requires the resolve-ai plugin — reuses its MCP connection.",
-      "version": "0.1.0",
       "category": "Developer Tools"
     }
   ]
