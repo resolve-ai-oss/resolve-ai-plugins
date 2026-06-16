@@ -9,16 +9,19 @@ SPDX-License-Identifier: Apache-2.0
 
 ## What's included
 
-Eight skills your host agent can engage:
+Eleven skills your host agent can engage:
 
 - **investigate** — open an existing investigation or start a new one from a URL, ID, or problem description
-- **ask** — send a follow-up question to an active investigation or chat
-- **alerts** — list and filter firing alerts (by team, time range, label, auto-investigated, …)
-- **investigations** — list and filter recent investigations (by team, time range, run type, use case)
-- **overview** — big-picture snapshot of open investigations, recent alerts, and in-flight chats
+- **ask** — send a follow-up question to an active investigation or chat, or start a fresh one
 - **steer** — promote a local finding or directive into an active investigation
 - **apply-fix** — translate Resolve's findings into local code edits
+- **prod-context** — pull production context for the area you're about to change, before the PR is up
+- **overview** — big-picture snapshot of open investigations, recent alerts, and in-flight chats
+- **alerts** — list and filter firing alerts (by team, time range, label, auto-investigated, …)
+- **investigations** — list and filter recent investigations (by team, time range, run type, use case)
+- **chats** — list recent Resolve chats
 - **help-resolve** — intro and routing skill for new users
+- **demo** — guided, presenter-led tour of Resolve over the connected org's live data
 
 Plus the underlying MCP tools (`get_investigation`, `start_investigation`, `ask`, `get_chat`, `list_chats`, `steer_investigation`, `read_file`, …). Tools that follow live progress return a self-contained `curl` as `stream_command` in their response — the host agent runs it to stream an investigation's trace (theory cards + evidence trail + phase) or a chat to completion. No bundled watcher binaries.
 
@@ -37,11 +40,11 @@ Install alongside the customer plugin, e.g. `claude plugin install resolve-ai@re
 ## Prerequisites
 
 - A Claude Code, Codex, or Cursor install
-- A Resolve API token (see [Authentication](#authentication))
+- A Resolve account on a reachable deployment — you sign in via OAuth on first connect, no API token to generate (see [Authentication](#authentication))
 
 ## Configuration
 
-Set the `url` field in the MCP config for whichever host you use to `<your-resolve-host>/mcp/v2`:
+Set the `url` field in the MCP config for whichever host you use to `https://app0.resolve.ai/mcp/v2`:
 
 - Claude Code: `claude-code-plugin/.mcp.json`
 - Codex: `codex-plugin/.mcp.json`
