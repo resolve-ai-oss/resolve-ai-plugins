@@ -1,5 +1,5 @@
 ---
-# Copyright 2026 Cloud Data Labs, Inc.
+# Copyright 2026 Resolve AI, Inc.
 # SPDX-License-Identifier: Apache-2.0
 name: demo
 description: Run a guided, presenter-led tour of Resolve using the connected org's live data — surface the environment, resume a chat, fire several in parallel, drill a real RCA with its evidence and a live thread, then investigate something from scratch. Use when someone wants to demo Resolve, give a tour, or show a new user what it can do — phrases like "demo Resolve", "give me a tour", "walk them through Resolve", "show me what Resolve can do", "demo this to <person>".

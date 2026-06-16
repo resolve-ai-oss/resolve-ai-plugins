@@ -1,5 +1,5 @@
 ---
-# Copyright 2026 Cloud Data Labs, Inc.
+# Copyright 2026 Resolve AI, Inc.
 # SPDX-License-Identifier: Apache-2.0
 name: prod-context
 description: Get production context from Resolve for the area you're about to change — so the work is grounded in what production looks like and aware of how the change could affect it, before you start rather than after the PR is up. Use before implementing a fix or feature, when finalizing a plan or approach, or before editing anything that affects a production system — application code, infrastructure, or config-as-code (Helm, Terraform, Dockerfiles, CI/CD, SQL/migrations, protos) — or when the user says "let's build/fix/implement X". Surfaces the area's normal operational profile (traffic and usage, telemetry coverage, baseline latency/error rate), the regression risk of the change, plus any active alerts, open investigations, recent incidents or deploys, and known fragility.

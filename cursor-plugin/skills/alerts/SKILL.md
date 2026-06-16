@@ -1,5 +1,5 @@
 ---
-# Copyright 2026 Cloud Data Labs, Inc.
+# Copyright 2026 Resolve AI, Inc.
 # SPDX-License-Identifier: Apache-2.0
 name: alerts
 description: List and filter alerts in Resolve. Use when the user asks "show me alerts", "any new alerts", "alerts on <team>", "find the alert matching <pattern>", "alerts that auto-investigated", "alerts where <label> is critical/missing", or wants a focused alerts view (separate from a full overview snapshot).

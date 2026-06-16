@@ -1,5 +1,5 @@
 ---
-# Copyright 2026 Cloud Data Labs, Inc.
+# Copyright 2026 Resolve AI, Inc.
 # SPDX-License-Identifier: Apache-2.0
 name: chats
 description: List recent Resolve chats. Use when the user asks "show me my chats", "what chats are in flight", "any chats running", "chats from last week", or wants a focused chat list (separate from a full overview snapshot).

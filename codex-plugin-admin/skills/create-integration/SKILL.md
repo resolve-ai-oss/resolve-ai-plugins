@@ -1,5 +1,5 @@
 ---
-# Copyright 2026 Cloud Data Labs, Inc.
+# Copyright 2026 Resolve AI, Inc.
 # SPDX-License-Identifier: Apache-2.0
 name: create-integration
 description: Connect a new data source (Datadog, Grafana, Prometheus, …) to Resolve. Use when the user wants to add a data source to Resolve — phrases like "create a Datadog integration", "set up Grafana in Resolve", "add a new integration", "connect Prometheus to Resolve", "configure SaaS integration", or "wire up <X>". Walks the user through the right path (SaaS REST API, satellite, or dedicated UI flow) for the integration they want.

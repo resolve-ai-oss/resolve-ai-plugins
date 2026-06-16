@@ -1,5 +1,5 @@
 <!--
-Copyright 2026 Cloud Data Labs, Inc.
+Copyright 2026 Resolve AI, Inc.
 SPDX-License-Identifier: Apache-2.0
 -->
 

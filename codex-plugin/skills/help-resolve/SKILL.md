@@ -1,5 +1,5 @@
 ---
-# Copyright 2026 Cloud Data Labs, Inc.
+# Copyright 2026 Resolve AI, Inc.
 # SPDX-License-Identifier: Apache-2.0
 name: help-resolve
 description: Introduce Resolve (the AI DevOps investigation platform) and route the user to the right next step — investigate, ask, apply a fix, or get an overview. Use when the user mentions "Resolve", "resolve.ai", asks "what is Resolve" or "how do I use Resolve", pastes a Resolve URL, or describes a production incident or active investigation they want Resolve to help with.

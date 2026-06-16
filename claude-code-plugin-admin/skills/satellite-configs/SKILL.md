@@ -1,5 +1,5 @@
 ---
-# Copyright 2026 Cloud Data Labs, Inc.
+# Copyright 2026 Resolve AI, Inc.
 # SPDX-License-Identifier: Apache-2.0
 name: satellite-configs
 description: Edit a Resolve satellite's Helm values.yaml — add or modify integrations on the satellite, configure networking, set environment variables. Use when the user mentions editing satellite config — phrases like "edit satellite values.yaml", "add Tempo to my satellite", "configure satellite networking", "satellite chart values", "satellite helm config", or "wire up a satellite integration".
