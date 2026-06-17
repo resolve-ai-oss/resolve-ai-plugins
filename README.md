@@ -66,6 +66,9 @@ The plugin gives your agent Resolve tools for listing alerts, reading investigat
 
 ```text
 /plugin marketplace add resolve-ai-oss/resolve-ai-plugins
+```
+
+```text
 /plugin install resolve-ai@resolve-ai-plugins
 ```
 
@@ -75,10 +78,11 @@ Restart Claude Code after installation. `/mcp` should show `resolve` connected.
 
 ```sh
 codex plugin marketplace add resolve-ai-oss/resolve-ai-plugins
-codex
+codex plugin add resolve-ai@resolve-ai-plugins
+codex mcp login resolve
 ```
 
-Open `/plugins`, select the Resolve AI marketplace, and install `resolve-ai`. Restart Codex after installation.
+Restart Codex after installation. `/mcp` should show `resolve` connected.
 
 ### Cursor
 
