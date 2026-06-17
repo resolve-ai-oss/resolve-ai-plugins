@@ -29,36 +29,27 @@ https://app0.resolve.ai/mcp/v2
 
 ## Contents
 
-- [What It Does](#what-it-does)
+- [How It Works](#how-it-works)
 - [Install](#install)
-- [Skills](#skills)
-- [Admin Plugin](#admin-plugin)
-- [Authentication](#authentication)
 - [Migrating from v1](#migrating-from-v1)
+- [Authentication](#authentication)
+- [Skills](#skills)
 - [Live Progress](#live-progress)
+- [Admin Plugin](#admin-plugin)
 - [FAQ](#faq)
 
-## What It Does
+## How It Works
 
 Ask your agent to:
 
 ```text
 Show me recent Resolve investigations.
-```
-
-```text
 Summarize this investigation: https://app0.resolve.ai/chat/<investigation_id>
-```
-
-```text
 Ask Resolve what changed around the latency alert.
+Apply the fix from this Resolve root-cause analysis.
 ```
 
-```text
-Apply the fix from this Resolve RCA.
-```
-
-The plugin gives your agent Resolve tools for listing alerts, reading investigations, starting new RCAs, following live progress, asking questions, steering active investigations, reading cited files, and submitting feedback.
+The plugin connects your agent to Resolve over MCP and installs skills for listing alerts, reading investigations, starting new root-cause analyses, following live progress, asking questions, steering active investigations, reading cited files, and submitting feedback.
 
 ## Install
 
@@ -103,6 +94,48 @@ For local testing before marketplace distribution, clone the repository and syml
 
 Cursor MCP install links and `cursor --add-mcp` install only an MCP server definition, not Resolve's skills — use the plugin marketplace for the full plugin. To re-discover new plugins added to the repository later, re-import the repository URL.
 
+## Migrating from v1
+
+Resolve MCP moved to `/mcp/v2`, with OAuth and the plugin install flow above.
+
+### Claude Code, Codex, or Cursor
+
+If you previously configured Resolve MCP manually:
+
+1. Remove the old Resolve MCP server entry.
+2. Remove any old `RESOLVE_API_KEY` from your shell profile or host config.
+3. Install `resolve-ai` from the plugin marketplace using [Install](#install).
+4. Sign in with OAuth when prompted.
+5. Restart your host. `/mcp` should show `resolve` connected.
+
+### Other MCP clients
+
+For MCP clients that do not support this plugin, point the client at:
+
+```text
+https://app0.resolve.ai/mcp/v2
+```
+
+Keep using `RESOLVE_API_KEY` for those clients. They get the same Resolve MCP tools, but not the bundled plugin skills.
+
+### REST API only
+
+If you only call the Resolve REST API and do not use MCP, no action is needed.
+
+## Authentication
+
+The MCP transport uses OAuth. On first connect, Claude Code, Codex, or Cursor discovers Resolve OAuth from `https://app0.resolve.ai/mcp/v2` and prompts you to sign in.
+
+You do not need to generate or export `RESOLVE_API_KEY` for normal plugin usage. Identity and access scope come from the OAuth sign-in.
+
+Cursor uses a fixed OAuth callback for all MCP servers:
+
+```text
+cursor://anysphere.cursor-mcp/oauth/callback
+```
+
+If a Resolve deployment whitelists redirect URIs instead of relying only on Dynamic Client Registration, that callback must be registered on the Resolve OAuth app.
+
 ## Skills
 
 | Skill            | Use it for                                                                                           |
@@ -121,6 +154,12 @@ Cursor MCP install links and `cursor --add-mcp` install only an MCP server defin
 
 The underlying MCP tools include `get_investigation`, `start_investigation`, `ask`, `get_chat`, `list_chats`, `list_investigations`, `list_alerts`, `steer_investigation`, `read_file`, `create_attachment_upload`, and `submit_feedback`.
 
+## Live Progress
+
+Some Resolve operations are long-running. `ask`, `start_investigation`, and `steer_investigation` may return a `stream_command`, which is a self-contained `curl` command for following live progress.
+
+The host agent runs that command in the background and reads stdout until the operation completes. The command carries a short-lived scoped watch token, so no API key is needed.
+
 ## Admin Plugin
 
 This marketplace also ships `resolve-ai-admin`, a companion plugin for administrators who manage Resolve integrations.
@@ -138,48 +177,6 @@ This marketplace also ships `resolve-ai-admin`, a companion plugin for administr
 ```
 
 For Cursor, install `resolve-ai-admin` from the same team marketplace after `resolve-ai`. Keep it optional unless every developer in the group manages Resolve integrations.
-
-## Authentication
-
-The MCP transport uses OAuth. On first connect, Claude Code, Codex, or Cursor discovers Resolve OAuth from `https://app0.resolve.ai/mcp/v2` and prompts you to sign in.
-
-You do not need to generate or export `RESOLVE_API_KEY` for normal plugin usage. Identity and access scope come from the OAuth sign-in.
-
-Cursor uses a fixed OAuth callback for all MCP servers:
-
-```text
-cursor://anysphere.cursor-mcp/oauth/callback
-```
-
-If a Resolve deployment whitelists redirect URIs instead of relying only on Dynamic Client Registration, that callback must be registered on the Resolve OAuth app.
-
-## Migrating from v1
-
-Resolve's MCP moved to the `/mcp/v2` endpoint, with OAuth and the plugin experience above. How you migrate depends on your client.
-
-### Claude Code, Codex, or Cursor
-
-Remove your old manually configured Resolve MCP server, then install the plugin as shown in [Install](#install). The plugin already targets `/mcp/v2` and signs you in via OAuth, so you don't configure a URL by hand. Delete your old MCP key or token from wherever you set it — an old MCP server entry, or `RESOLVE_API_KEY` in your shell profile — since normal plugin usage no longer needs it. Restart your host so it reloads the MCP server definition.
-
-### Other MCP clients (Devin, Gemini CLI, Antigravity, …)
-
-These clients connect to Resolve directly without the plugin. Point your client's MCP configuration at:
-
-```text
-https://app0.resolve.ai/mcp/v2
-```
-
-They don't run the plugin's OAuth flow, so keep authenticating with your existing `RESOLVE_API_KEY`. You get the same Resolve MCP tools, but the bundled skills aren't installed for you — copy the skill files you want from this repository's `plugins/claude/resolve-ai/skills/` directory (they're plain Markdown) into whatever instructions or skills mechanism your client supports. If you have workflows hardcoded to v1 tool names, update them to the tool names the server advertises after you connect.
-
-### REST API only
-
-If you only call the Resolve REST API and don't use MCP, nothing changes.
-
-## Live Progress
-
-Some Resolve operations are long-running. `ask`, `start_investigation`, and `steer_investigation` may return a `stream_command`, which is a self-contained `curl` command for following live progress.
-
-The host agent runs that command in the background and reads stdout until the operation completes. The command carries a short-lived scoped watch token, so no API key is needed.
 
 ## FAQ
 
