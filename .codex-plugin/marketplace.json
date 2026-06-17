@@ -8,7 +8,7 @@
       "name": "resolve-ai",
       "source": {
         "source": "local",
-        "path": "./codex-plugin"
+        "path": "./plugins/codex/resolve-ai"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
@@ -20,7 +20,7 @@
       "name": "resolve-ai-admin",
       "source": {
         "source": "local",
-        "path": "./codex-plugin-admin"
+        "path": "./plugins/codex/resolve-ai-admin"
       },
       "policy": {
         "installation": "AVAILABLE",

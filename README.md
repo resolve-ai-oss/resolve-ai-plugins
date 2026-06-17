@@ -165,7 +165,7 @@ These clients connect to Resolve directly without the plugin. Point your client'
 https://app0.resolve.ai/mcp/v2
 ```
 
-They don't run the plugin's OAuth flow, so keep authenticating with your existing `RESOLVE_API_KEY`. You get the same Resolve MCP tools, but the bundled skills aren't installed for you — copy the skill files you want from this repository's `claude-code-plugin/skills/` directory (they're plain Markdown) into whatever instructions or skills mechanism your client supports. If you have workflows hardcoded to v1 tool names, update them to the tool names the server advertises after you connect.
+They don't run the plugin's OAuth flow, so keep authenticating with your existing `RESOLVE_API_KEY`. You get the same Resolve MCP tools, but the bundled skills aren't installed for you — copy the skill files you want from this repository's `plugins/claude/resolve-ai/skills/` directory (they're plain Markdown) into whatever instructions or skills mechanism your client supports. If you have workflows hardcoded to v1 tool names, update them to the tool names the server advertises after you connect.
 
 ### REST API only
 
