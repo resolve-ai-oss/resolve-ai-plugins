@@ -153,7 +153,7 @@ If a Resolve deployment whitelists redirect URIs instead of relying only on Dyna
 | `prod-context`   | Pull production context before implementing a risky code, infra, config, or migration change.         |
 | `steer`          | Send a finding, hypothesis, or directive into an active Resolve investigation.                        |
 
-The underlying MCP tools include `get_investigation`, `start_investigation`, `ask`, `get_chat`, `list_chats`, `list_investigations`, `list_alerts`, `steer_investigation`, `read_file`, `create_attachment_upload`, and `submit_feedback`.
+The underlying MCP tools include `get_investigation`, `start_investigation`, `ask`, `get_chat`, `list_chats`, `list_investigations`, `list_alerts`, `steer_investigation`, `read_file`, `upload_attachment`, and `submit_feedback`.
 
 ## Live Progress
 
