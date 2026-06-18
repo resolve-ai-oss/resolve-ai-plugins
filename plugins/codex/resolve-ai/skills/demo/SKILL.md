@@ -2,7 +2,7 @@
 # Copyright 2026 Resolve AI, Inc.
 # SPDX-License-Identifier: Apache-2.0
 name: demo
-description: Run a guided, presenter-led tour of Resolve using the connected org's live data — surface the environment, resume a chat, fire several in parallel, drill a real RCA with its evidence and a live thread, then investigate something from scratch. Use when someone wants to demo Resolve, give a tour, or show a new user what it can do — phrases like "demo Resolve", "give me a tour", "walk them through Resolve", "show me what Resolve can do", "demo this to <person>".
+description: Run a guided, self-paced tour of Resolve using the connected org's live data — surface the environment, resume a chat, fire several in parallel, drill a real RCA with its evidence and a live thread, then investigate something from scratch. Use when someone wants to demo Resolve, give a tour, or show a new user what it can do — phrases like "demo Resolve", "give me a tour", "walk them through Resolve", "show me what Resolve can do", "demo this to <person>".
 version: 0.1.0
 argument-hint: [optional emphasis, or "start"]
 license: Apache-2.0
@@ -10,7 +10,7 @@ license: Apache-2.0
 
 # Demo Resolve
 
-A presenter-led, checkpointed walkthrough of Resolve using **the connected org's live data** (assume there's plenty). You drive; the audience watches your screen. The arc escalates:
+A guided, checkpointed walkthrough of Resolve using **your connected org's live data**. You drive each step at your own pace. The arc escalates:
 
 **surface → resume a chat → many in parallel → drill a real RCA (evidence + live thread) → turn the findings into a code-fix PR → investigate from scratch.**
 
@@ -26,28 +26,28 @@ If `$ARGUMENTS` carries an emphasis (e.g. "focus on logs", "keep it short"), bia
 
 Establish the mode at the start and honor it for **every** command, every beat:
 
-- **Auto** (default — today's behavior): _you_ run each command via the tools, pausing at checkpoints for the presenter's "go" or to let them pick an option.
-- **Manual** (hand-me-the-commands): you do **not** execute the beat's action. Compose the **full command with its args/message filled in** and present it for the presenter to type themselves, then **stop and wait** for them to run it before moving on. You may still run read-only setup (e.g. `overview`) so the commands you hand over carry real IDs/values, but every action command (`ask`, `investigate`, `steer`, `apply-fix`) is theirs to enter. Because they're invoking the real skills, those skills' own run/format behavior (streaming, citations, canvas URLs) applies as-is.
+- **Auto** (default — today's behavior): _you_ run each command via the tools, pausing at checkpoints for the user's "go" or to let them pick an option.
+- **Manual** (hand-me-the-commands): you do **not** execute the beat's action. Compose the **full command with its args/message filled in** and present it for the user to type themselves, then **stop and wait** for them to run it before moving on. You may still run read-only setup (e.g. `overview`) so the commands you hand over carry real IDs/values, but every action command (`ask`, `investigate`, `steer`, `apply-fix`) is theirs to enter. Because they're invoking the real skills, those skills' own run/format behavior (streaming, citations, canvas URLs) applies as-is.
 
 Select via `$ARGUMENTS` (`auto` / `manual`); if unset, ask once at pre-flight.
 
 ## Two registers in your output
 
-- **Prospect-facing** (plain prose): the lines you screen-share — clean, jargon-light, short.
-- **Presenter cue** (prefix `▶`): control prompts addressed to _you_, not the audience. End every beat with a cue that previews exactly what the next step will do, e.g. `▶ Next: open a real RCA and pull the raw telemetry behind its top theory. Say "go", pick from the menu, or tell me what to show.`
-- **Command tag** (prefix `▷`): name the command for each beat's capability. In **auto** mode it's just the label, so the audience learns it — `▷ Run it yourself: $resolve-ai:overview`. In **manual** mode it's the _full runnable command with composed args_, and you stop and wait for the presenter to enter it — e.g. `▷ Type this: $resolve-ai:ask Follow-up: of the error spikes in svc-analysis, which one is most worth acting on first?`. Mapping (args from each skill's own `argument-hint`): surface → `$resolve-ai:overview` (focused lists `$resolve-ai:alerts`, `$resolve-ai:investigations`, `$resolve-ai:chats`); resume / ask / thread / parallel → `$resolve-ai:ask <message>`; redirect a live investigation → `$resolve-ai:steer <message>`; drill or start an RCA → `$resolve-ai:investigate <url-or-id | problem>`; apply a fix → `$resolve-ai:apply-fix`.
+- **Tour narration** (plain prose): the lines you walk the user through — clean, jargon-light, short.
+- **Control cue** (prefix `▶`): meta prompts to the user, not part of the narration. End every beat with a cue that previews exactly what the next step will do, e.g. `▶ Next: open a real RCA and pull the raw telemetry behind its top theory. Say "go", pick from the menu, or tell me what to show.`
+- **Command tag** (prefix `▷`): name the command for each beat's capability. In **auto** mode it's just the label, so the user learns it — `▷ Run it yourself: $resolve-ai:overview`. In **manual** mode it's the _full runnable command with composed args_, and you stop and wait for the user to enter it — e.g. `▷ Type this: $resolve-ai:ask Follow-up: of the error spikes in svc-analysis, which one is most worth acting on first?`. Mapping (args from each skill's own `argument-hint`): surface → `$resolve-ai:overview` (focused lists `$resolve-ai:alerts`, `$resolve-ai:investigations`, `$resolve-ai:chats`); resume / ask / thread / parallel → `$resolve-ai:ask <message>`; redirect a live investigation → `$resolve-ai:steer <message>`; drill or start an RCA → `$resolve-ai:investigate <url-or-id | problem>`; apply a fix → `$resolve-ai:apply-fix`.
 
 ## Pacing — light checkpoints
 
-Pause only at: the start, the post-overview menu, and before any step that **sends a message or starts an investigation**. Auto-flow narration within a beat. In **auto** mode, never send a chat or start an investigation without an explicit "go" in that same turn; the read-only beats (overview, RCA drill, evidence) need no consent. In **manual** mode you never execute an action yourself — you present the full command and wait for the presenter to run it, which is the natural checkpoint.
+Pause only at: the start, the post-overview menu, and before any step that **sends a message or starts an investigation**. Auto-flow narration within a beat. In **auto** mode, never send a chat or start an investigation without an explicit "go" in that same turn; the read-only beats (overview, RCA drill, evidence) need no consent. In **manual** mode you never execute an action yourself — you present the full command and wait for the user to run it, which is the natural checkpoint.
 
 ## Beats
 
 ### 0 · Pre-flight (you only)
 
-On launch, don't address the audience yet. Settle the **run mode** (auto vs manual — ask if `$ARGUMENTS` didn't set it) and lay out the agenda for yourself, then `▶ Mode: <auto|manual>. Share your screen, then say "start".` Wait.
+On launch, don't start the tour yet. Settle the **run mode** (auto vs manual — ask if `$ARGUMENTS` didn't set it) and lay out the agenda for yourself, then `▶ Mode: <auto|manual>. Say "start" when you're ready.` Wait.
 
-### 1 · Orient — what Resolve is (prospect-facing)
+### 1 · Orient — what Resolve is
 
 One breath on Resolve: it's an AI SRE for your production incidents. Start with the big picture, then the two primitives everything centers on.
 
@@ -113,7 +113,7 @@ Take the root cause and the thread answer from beat 5 and turn them into a local
 
 ### 7 · Investigate from scratch (the climax) — opt-in
 
-Seed a brand-new investigation from the **real recent alert** picked in beat 2: compose a short markdown prompt from its title/labels, show it to the audience ("this fired ~<N> min ago — watch Resolve take it cold"), and only on explicit yes call `start_investigation`. Then stream it live per the `investigate` skill — run its returned `stream_command` — theory cards and the evidence trail forming in real time.
+Seed a brand-new investigation from the **real recent alert** picked in beat 2: compose a short markdown prompt from its title/labels, show it to the user ("this fired ~<N> min ago — watch Resolve take it cold"), and only on explicit yes call `start_investigation`. Then stream it live per the `investigate` skill — run its returned `stream_command` — theory cards and the evidence trail forming in real time.
 `▶ This starts a real investigation (uses org credits). Start it? Say "go".`
 
 ### 8 · Recap + toolbox
