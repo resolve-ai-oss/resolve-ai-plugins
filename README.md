@@ -77,7 +77,7 @@ Restart Codex after installation. `/mcp` should show `resolve` connected.
 
 ### Cursor
 
-Cursor support is still being tested; treat these steps as the intended install path until marketplace distribution is fully validated.
+Cursor support is still being tested. Unless you are validating Cursor distribution, use Claude Code or Codex today. Treat these steps as the intended install path once marketplace distribution is fully validated.
 
 1. In the Cursor Dashboard, open Plugins and add a team marketplace.
 2. Import this repository:
