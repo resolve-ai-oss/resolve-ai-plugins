@@ -42,7 +42,7 @@ Summarize compactly:
 
 - Count + the time range covered.
 - Severity / action breakdown when it's informative.
-- Per-alert one-liner: `time`, `title`, `severity`, `action`, `is_auto_investigated`, `entity_key`, `source_url`.
+- Per-alert one-liner: `time`, `title`, `severity`, `action`, `is_auto_investigated`, `entity_key`.
 - Surface investigation links only when the result includes an `investigation_id`; never fabricate one.
 - Preserve any `[label](path)` citations verbatim.
 
