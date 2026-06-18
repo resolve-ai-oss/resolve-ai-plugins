@@ -138,19 +138,20 @@ If a Resolve deployment whitelists redirect URIs instead of relying only on Dyna
 
 ## Skills
 
-| Skill            | Use it for                                                                                           |
-| ---------------- | ---------------------------------------------------------------------------------------------------- |
-| `alerts`         | List and filter firing alerts by team, time range, label, severity, or auto-investigation status.    |
-| `ask`            | Ask Resolve a question, either in a new chat or as a follow-up to an existing chat or investigation. |
-| `apply-fix`      | Translate Resolve's root-cause findings into local code changes and a PR.                            |
-| `chats`          | List recent Resolve chats and see which ones are still running.                                      |
-| `demo`           | Run a guided tour of Resolve using live data from the connected org.                                 |
-| `help-resolve`   | Explain Resolve and route the user to the right workflow.                                            |
-| `investigate`    | Open an existing Resolve investigation or start a new RCA from a problem description.                |
-| `investigations` | List and filter recent investigations by team, run type, use case, and time range.                   |
-| `overview`       | Get a compact snapshot of investigations, alerts, and chats.                                         |
-| `prod-context`   | Pull production context before implementing a risky code, infra, config, or migration change.        |
-| `steer`          | Send a finding, hypothesis, or directive into an active Resolve investigation.                       |
+| Skill            | Use it for                                                                                            |
+| ---------------- | ----------------------------------------------------------------------------------------------------- |
+| `alerts`         | List and filter firing alerts by team, time range, label, severity, or auto-investigation status.     |
+| `ask`            | Ask Resolve a question, either in a new chat or as a follow-up to an existing chat or investigation.  |
+| `apply-fix`      | Translate Resolve's root-cause findings into local code changes and a PR.                             |
+| `chats`          | List recent Resolve chats and see which ones are still running.                                       |
+| `demo`           | Run a guided tour of Resolve using live data from the connected org.                                  |
+| `feedback`       | Capture a verdict on an investigation, chat answer, or the product when work wraps up, and submit it. |
+| `help-resolve`   | Explain Resolve and route the user to the right workflow.                                             |
+| `investigate`    | Open an existing Resolve investigation or start a new RCA from a problem description.                 |
+| `investigations` | List and filter recent investigations by team, run type, use case, and time range.                    |
+| `overview`       | Get a compact snapshot of investigations, alerts, and chats.                                          |
+| `prod-context`   | Pull production context before implementing a risky code, infra, config, or migration change.         |
+| `steer`          | Send a finding, hypothesis, or directive into an active Resolve investigation.                        |
 
 The underlying MCP tools include `get_investigation`, `start_investigation`, `ask`, `get_chat`, `list_chats`, `list_investigations`, `list_alerts`, `steer_investigation`, `read_file`, `create_attachment_upload`, and `submit_feedback`.
 
