@@ -116,7 +116,23 @@ For MCP clients that do not support this plugin, point the client at:
 https://app0.resolve.ai/mcp/v2
 ```
 
-Keep using `RESOLVE_API_KEY` for those clients. They get the same Resolve MCP tools, but not the bundled plugin skills.
+These clients get the same Resolve MCP tools, but not the bundled plugin skills. Authenticate with a `RESOLVE_API_KEY` ([how to generate one](#how-do-i-generate-a-resolve-api-key)) sent as a bearer token. Most hosts take either a static header or a token env var:
+
+```jsonc
+// header-based hosts
+"resolve": {
+  "type": "http",
+  "url": "https://app0.resolve.ai/mcp/v2",
+  "headers": { "Authorization": "Bearer ${RESOLVE_API_KEY}" }
+}
+```
+
+```toml
+# Codex-style hosts
+[mcp_servers.resolve]
+url = "https://app0.resolve.ai/mcp/v2"
+bearer_token_env_var = "RESOLVE_API_KEY"
+```
 
 ### REST API only
 
