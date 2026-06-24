@@ -134,6 +134,15 @@ url = "https://app0.resolve.ai/mcp/v2"
 bearer_token_env_var = "RESOLVE_API_KEY"
 ```
 
+```jsonc
+// Cursor mcp.json — references env vars as ${env:NAME}, not the bare ${NAME}
+"resolve": {
+  "type": "http",
+  "url": "https://app0.resolve.ai/mcp/v2",
+  "headers": { "Authorization": "Bearer ${env:RESOLVE_API_KEY}" }
+}
+```
+
 ### REST API only
 
 If you only call the Resolve REST API and do not use MCP, no action is needed.
