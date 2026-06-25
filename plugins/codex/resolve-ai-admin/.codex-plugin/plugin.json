@@ -1,6 +1,6 @@
 {
   "name": "resolve-ai-admin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Administrator skills for managing Resolve integrations: create, debug, and configure satellite-backed sources.",
   "author": {
     "name": "Resolve AI"
@@ -12,6 +12,8 @@
     "developerName": "Resolve AI",
     "category": "Developer Tools",
     "capabilities": ["Read", "Write"],
+    "composerIcon": "./assets/resolve-logo.png",
+    "logo": "./assets/resolve-logo.png",
     "defaultPrompt": [
       "Debug my Datadog integration in Resolve.",
       "Add Tempo to my Resolve satellite.",

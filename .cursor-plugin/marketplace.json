@@ -13,13 +13,15 @@
       "name": "resolve-ai",
       "source": "./plugins/cursor/resolve-ai",
       "description": "Use Resolve for investigations, incidents, and production context.",
-      "category": "Developer Tools"
+      "category": "Developer Tools",
+      "logo": "assets/resolve-logo.png"
     },
     {
       "name": "resolve-ai-admin",
       "source": "./plugins/cursor/resolve-ai-admin",
       "description": "Administrator skills for managing Resolve integrations (create, debug, satellite configs). Requires the resolve-ai plugin — reuses its MCP connection.",
-      "category": "Developer Tools"
+      "category": "Developer Tools",
+      "logo": "assets/resolve-logo.png"
     }
   ]
 }

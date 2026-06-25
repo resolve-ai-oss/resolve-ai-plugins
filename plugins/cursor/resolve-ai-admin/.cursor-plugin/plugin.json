@@ -1,10 +1,11 @@
 {
   "name": "resolve-ai-admin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Administrator skills for managing Resolve integrations: create, debug, and configure satellite-backed sources.",
   "author": {
     "name": "Resolve AI"
   },
   "homepage": "https://resolve.ai",
+  "logo": "assets/resolve-logo.png",
   "skills": "./skills/"
 }

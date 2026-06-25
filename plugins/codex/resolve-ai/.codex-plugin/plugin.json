@@ -1,6 +1,6 @@
 {
   "name": "resolve-ai",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Use Resolve for investigations, incidents, and production context.",
   "author": {
     "name": "Resolve AI"
@@ -13,6 +13,8 @@
     "developerName": "Resolve AI",
     "category": "Developer Tools",
     "capabilities": ["Read", "Write"],
+    "composerIcon": "./assets/resolve-logo.png",
+    "logo": "./assets/resolve-logo.png",
     "defaultPrompt": [
       "List recent Resolve investigations.",
       "Get details for this Resolve investigation.",
