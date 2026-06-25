@@ -43,7 +43,7 @@ integrations:
 
 To learn the exact `connection` schema for a given integration, ask Resolve via `resolve-ai:ask` ("What fields does the Tempo connection schema require?"). The agent will return the schema with field descriptions.
 
-For integration keys + example shapes, see the auto-generated catalog at `docs/Integrations.md` in the devops-copilot repo (or the customer-facing equivalent).
+For the supported integration keys + example connection shapes, ask Resolve via `resolve-ai:ask` (e.g. "List the supported integration keys with an example connection for each").
 
 ### Configuring satellite networking
 
