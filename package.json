@@ -1,0 +1,19 @@
+{
+  "name": "resolve-ai-pi",
+  "private": true,
+  "description": "Resolve AI skills and Pi MCP guidance for the Resolve Everywhere plugin.",
+  "keywords": [
+    "pi-package"
+  ],
+  "pi": {
+    "extensions": [
+      "./plugins/pi/resolve-ai/extensions"
+    ],
+    "skills": [
+      "./plugins/pi/resolve-ai/skills"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}

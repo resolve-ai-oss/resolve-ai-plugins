@@ -14,7 +14,7 @@ SPDX-License-Identifier: Apache-2.0
 </p>
 
 <p align="center">
-  AI agents that run your software, so your engineers can get back to building — now inside Claude Code, Codex, and Cursor.
+  AI agents that run your software, so your engineers can get back to building — now inside Claude Code, Codex, Cursor, and Pi.
 </p>
 
 ---
@@ -94,6 +94,19 @@ For local testing before marketplace distribution, clone the repository and syml
 
 Cursor MCP install links and `cursor --add-mcp` install only an MCP server definition, not Resolve's skills — use the plugin marketplace for the full plugin. To re-discover new plugins added to the repository later, re-import the repository URL.
 
+### Pi
+
+Pi uses `pi-mcp-adapter` plus a Pi package manifest; it does not read the Claude/Codex/Cursor plugin manifests.
+
+```sh
+pi install npm:pi-mcp-adapter
+pi install git:github.com/resolve-ai-oss/resolve-ai-plugins
+```
+
+`pi install` loads the skills and Pi guidance extension but does **not** merge MCP servers into your Pi config. Add a `resolve` HTTP MCP server pointing at the [Resolve MCP URL](#other-mcp-clients) to your Pi config (`~/.pi/agent/mcp.json`).
+
+Restart Pi, then run `/mcp reconnect resolve` (or ask Pi to connect Resolve); the first connection opens the browser OAuth flow — no API key needed. Resolve skills appear as Pi commands such as `/skill:overview` and `/skill:ask`.
+
 ## Migrating from v1
 
 Resolve MCP moved to `/mcp/v2`, with OAuth and the plugin install flow above.
@@ -149,7 +162,7 @@ If you only call the Resolve REST API and do not use MCP, no action is needed.
 
 ## Authentication
 
-The MCP transport uses OAuth. On first connect, Claude Code, Codex, or Cursor discovers Resolve OAuth from `https://app0.resolve.ai/mcp/v2` and prompts you to sign in.
+The MCP transport uses OAuth. On first connect, Claude Code, Codex, Cursor, or Pi discovers Resolve OAuth from `https://app0.resolve.ai/mcp/v2` and prompts you to sign in.
 
 You do not need to generate or export `RESOLVE_API_KEY` for normal plugin usage. Identity and access scope come from the OAuth sign-in.
 
@@ -208,7 +221,7 @@ For Cursor, install `resolve-ai-admin` from the same team marketplace after `res
 
 ### How do I generate a Resolve API key?
 
-If you use the plugin in Claude Code, Codex, or Cursor, you don't need one — sign-in is handled by OAuth (see [Authentication](#authentication)), and normal plugin usage never needs an API key.
+If you use the plugin in Claude Code, Codex, Cursor, or Pi, you don't need one — sign-in is handled by OAuth (see [Authentication](#authentication)), and normal plugin usage never needs an API key.
 
 For MCP-only clients or direct REST API access, create a personal API token in Resolve:
 

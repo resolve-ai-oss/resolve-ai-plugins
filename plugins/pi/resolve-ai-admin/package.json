@@ -1,0 +1,13 @@
+{
+  "name": "resolve-ai-admin-pi",
+  "private": true,
+  "description": "Optional Resolve AI administrator skills for Pi.",
+  "keywords": [
+    "pi-package"
+  ],
+  "pi": {
+    "skills": [
+      "./skills"
+    ]
+  }
+}
