@@ -33,8 +33,8 @@ Map common phrasings to the right filter family:
 Summarize compactly:
 
 - Count + the time range covered.
-- Per-investigation one-liner: `title`, `phase`, `stop_reason` (if terminal), `run_type`, `use_case`, `team`, primary alert summary if present, `created_at`, and the canvas URL (`<your-resolve-host>/chat/<investigation_id>`).
-- When the list is long, group by `phase`, `team`, or `run_type` and offer to narrow.
+- Per-investigation one-liner: `title`, `run_type`, `use_case`, `team`, primary alert summary if present, `created_at`, and the canvas URL (`<your-resolve-host>/chat/<investigation_id>`).
+- When the list is long, group by `team` or `run_type` and offer to narrow.
 - Always surface canvas URLs — they're the user's drill-in path.
 - Preserve any `[label](path)` citations verbatim.
 
