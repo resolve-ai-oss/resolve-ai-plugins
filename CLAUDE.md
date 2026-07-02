@@ -30,7 +30,7 @@ If a skill starts restating a tool schema, trim the skill and improve the server
 
 ### Host size limits
 
-Hosts truncate MCP guidance text: Claude Code cuts server instructions and each tool description at 2KB; Codex prioritizes the first 512 characters of instructions. Keep server instructions under 2KB with the most important guidance first (enforced by `packages/svc-mcp-server/__tests__/v2HttpTransport.test.ts`). Never duplicate text between instructions and a tool description — the instructions copy is the one at truncation risk, so it should hold only cross-tool guidance.
+Hosts truncate MCP guidance text: Claude Code cuts server instructions and each tool description at 2KB; Codex prioritizes the first 512 characters of instructions. Keep server instructions under 2KB with the most important guidance first (enforced by `packages/svc-mcp-server/src/__tests__/v2HttpTransport.test.ts`). Never duplicate text between instructions and a tool description — the instructions copy is the one at truncation risk, so it should hold only cross-tool guidance.
 
 Example boundary:
 
