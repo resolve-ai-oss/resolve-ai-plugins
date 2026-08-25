@@ -2,7 +2,12 @@
   "mcpServers": {
     "resolve": {
       "type": "http",
-      "url": "https://app0.resolve.ai/mcp/v2"
+      "url": "https://app0.resolve.ai/mcp/v2",
+      "auth": "oauth",
+      "oauth": {
+        "redirectUri": "http://127.0.0.1:19876/callback"
+      },
+      "directTools": true
     }
   }
 }
