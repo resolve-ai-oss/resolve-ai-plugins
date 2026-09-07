@@ -1,0 +1,20 @@
+# Copyright 2026 Resolve AI, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+
+# Not a workspace package and not built here; one svc-mcp-server test reads the
+# resolve-ai skills tree, so it is exposed as test data and nothing else.
+# gazelle:exclude **
+
+filegroup(
+    name = "resolve_ai_skills",
+    srcs = glob(["plugins/claude/resolve-ai/skills/**"]),
+)
+
+# The js_library wrapper stays: js_test data requires JsInfo.
+js_library(
+    name = "resolve_ai_skills_data",
+    srcs = [":resolve_ai_skills"],
+    visibility = ["//packages/svc-mcp-server:__pkg__"],
+)
