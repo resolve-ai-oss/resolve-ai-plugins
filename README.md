@@ -4,7 +4,21 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <p align="center">
-  <img src="./assets/resolve-logo.svg" alt="Resolve logo" width="72" />
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="./assets/resolve-logo.svg"
+    />
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="./assets/resolve-logo-light.svg"
+    />
+    <img
+      src="./assets/resolve-logo-light.svg"
+      alt="Resolve AI"
+      width="72"
+    />
+  </picture>
 </p>
 
 <h1 align="center">Resolve AI</h1>
