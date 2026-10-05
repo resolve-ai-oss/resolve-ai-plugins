@@ -1,7 +1,7 @@
 # Copyright 2026 Resolve AI, Inc.
 # SPDX-License-Identifier: Apache-2.0
 
-load("//tools/bazel:defs.bzl", "resolve_prettier_test")
+load("//tools/bazel:defs.bzl", "resolve_format_test")
 load("@aspect_rules_js//js:defs.bzl", "js_library")
 
 # Not a workspace package and not built here; consumers read its files as test data.
@@ -32,4 +32,4 @@ js_library(
     visibility = ["//packages/scripts:__pkg__"],
 )
 
-resolve_prettier_test()
+resolve_format_test()
