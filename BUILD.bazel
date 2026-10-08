@@ -4,7 +4,6 @@
 load("//tools/bazel:defs.bzl", "resolve_format_test")
 load("@aspect_rules_js//js:defs.bzl", "js_library")
 
-# Not a workspace package and not built here; consumers read its files as test data.
 # gazelle:exclude **
 
 filegroup(
