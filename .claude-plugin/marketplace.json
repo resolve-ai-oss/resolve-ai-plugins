@@ -16,7 +16,7 @@
     {
       "name": "resolve-ai-admin",
       "source": "./plugins/claude/resolve-ai-admin",
-      "description": "Administrator skills for managing Resolve integrations (create, debug, satellite configs). Requires the resolve-ai plugin — reuses its MCP connection.",
+      "description": "Administrator skills for managing Resolve integrations and teams (create, debug, satellite configs, team onboarding). Requires the resolve-ai plugin — reuses its MCP connection.",
       "category": "Developer Tools"
     }
   ]
