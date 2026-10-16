@@ -215,13 +215,14 @@ The host agent runs that command in the background and reads stdout until the op
 
 ## Admin Plugin
 
-This marketplace also ships `resolve-ai-admin`, a companion plugin for administrators who manage Resolve integrations.
+This marketplace also ships `resolve-ai-admin`, a companion plugin for administrators who manage Resolve integrations and teams.
 
 | Skill                | Use it for                                                                                                 |
 | -------------------- | ---------------------------------------------------------------------------------------------------------- |
 | `create-integration` | Route a new data source to the right setup path: SaaS REST API, satellite-backed config, or UI/OAuth flow. |
 | `debug-integration`  | Diagnose or explain a failing or quiet integration.                                                        |
 | `satellite-configs`  | Edit a satellite Helm `values.yaml` for satellite-backed integrations and networking.                      |
+| `team-onboarding`    | Create or change a team: members and roles, linked groups, channels, and the alerts it owns.               |
 
 `resolve-ai-admin` has no MCP server of its own. It reuses the `resolve-ai` plugin's `/mcp/v2` connection and hands off to `resolve-ai:ask`, so install `resolve-ai` first.
 
