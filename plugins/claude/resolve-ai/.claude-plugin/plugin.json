@@ -1,10 +1,10 @@
 {
   "name": "resolve-ai",
-  "displayName": "Resolve AI",
+  "displayName": "Resolve",
   "version": "0.2.0",
   "description": "Use Resolve for investigations, incidents, and production context.",
   "author": {
-    "name": "Resolve AI"
+    "name": "ResolveAI"
   },
   "skills": "./skills/",
   "mcpServers": "./.mcp.json"

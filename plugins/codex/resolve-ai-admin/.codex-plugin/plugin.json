@@ -3,13 +3,13 @@
   "version": "0.2.0",
   "description": "Administrator skills for managing Resolve integrations and teams: create, debug, and configure satellite-backed sources, and set up teams.",
   "author": {
-    "name": "Resolve AI"
+    "name": "ResolveAI"
   },
   "skills": "./skills/",
   "interface": {
-    "displayName": "Resolve AI Admin",
+    "displayName": "Resolve Admin",
     "shortDescription": "Manage Resolve integrations and teams",
-    "developerName": "Resolve AI",
+    "developerName": "ResolveAI",
     "category": "Developer Tools",
     "capabilities": ["Read", "Write"],
     "composerIcon": "./assets/resolve-logo.png",

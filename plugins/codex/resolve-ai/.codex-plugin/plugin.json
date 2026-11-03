@@ -3,14 +3,14 @@
   "version": "0.2.1",
   "description": "Use Resolve for investigations, incidents, and production context.",
   "author": {
-    "name": "Resolve AI"
+    "name": "ResolveAI"
   },
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
-    "displayName": "Resolve AI",
+    "displayName": "Resolve",
     "shortDescription": "Investigate incidents with Resolve",
-    "developerName": "Resolve AI",
+    "developerName": "ResolveAI",
     "category": "Developer Tools",
     "capabilities": ["Read", "Write"],
     "composerIcon": "./assets/resolve-logo.png",

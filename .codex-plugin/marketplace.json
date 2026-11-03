@@ -1,7 +1,7 @@
 {
   "name": "resolve-ai-plugins",
   "interface": {
-    "displayName": "Resolve AI"
+    "displayName": "Resolve"
   },
   "plugins": [
     {

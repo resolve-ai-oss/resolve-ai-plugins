@@ -1,12 +1,12 @@
 {
   "name": "resolve-ai-plugins",
   "owner": {
-    "name": "Resolve AI",
+    "name": "ResolveAI",
     "email": "help@resolve.ai",
     "url": "https://resolve.ai"
   },
   "metadata": {
-    "description": "Resolve AI marketplace for the Cursor plugin."
+    "description": "Resolve marketplace for the Cursor plugin."
   },
   "plugins": [
     {

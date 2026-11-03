@@ -1,8 +1,8 @@
 {
   "name": "resolve-ai-plugins",
-  "description": "Resolve AI marketplace for the Claude Code plugin.",
+  "description": "Resolve marketplace for the Claude Code plugin.",
   "owner": {
-    "name": "Resolve AI",
+    "name": "ResolveAI",
     "email": "help@resolve.ai",
     "url": "https://resolve.ai"
   },
