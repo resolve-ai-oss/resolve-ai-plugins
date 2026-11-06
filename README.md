@@ -38,7 +38,7 @@ Resolve is an AI SRE for production. Its agents join every on-call rotation to t
 This plugin brings that into your coding agent over MCP: open and steer investigations, ask follow-up questions, pull production context, and turn root-cause findings into pull requests without leaving your editor.
 
 ```text
-https://app0.resolve.ai/mcp/v2
+https://agent.resolve.ai/mcp/v2
 ```
 
 ## Contents
@@ -58,7 +58,7 @@ Ask your agent to:
 
 ```text
 Show me recent Resolve investigations.
-Summarize this investigation: https://app0.resolve.ai/chat/<investigation_id>
+Summarize this investigation: https://agent.resolve.ai/chat/<investigation_id>
 Ask Resolve what changed around the latency alert.
 Apply the fix from this Resolve root-cause analysis.
 ```
@@ -140,7 +140,7 @@ If you previously configured Resolve MCP manually:
 For MCP clients that do not support this plugin, point the client at:
 
 ```text
-https://app0.resolve.ai/mcp/v2
+https://agent.resolve.ai/mcp/v2
 ```
 
 These clients get the same Resolve MCP tools, but not the bundled plugin skills. Authenticate with a `RESOLVE_API_KEY` ([how to generate one](#how-do-i-generate-a-resolve-api-key)) sent as a bearer token. Most hosts take either a static header or a token env var:
@@ -149,7 +149,7 @@ These clients get the same Resolve MCP tools, but not the bundled plugin skills.
 // header-based hosts
 "resolve": {
   "type": "http",
-  "url": "https://app0.resolve.ai/mcp/v2",
+  "url": "https://agent.resolve.ai/mcp/v2",
   "headers": { "Authorization": "Bearer ${RESOLVE_API_KEY}" }
 }
 ```
@@ -157,7 +157,7 @@ These clients get the same Resolve MCP tools, but not the bundled plugin skills.
 ```toml
 # Codex-style hosts
 [mcp_servers.resolve]
-url = "https://app0.resolve.ai/mcp/v2"
+url = "https://agent.resolve.ai/mcp/v2"
 bearer_token_env_var = "RESOLVE_API_KEY"
 ```
 
@@ -165,7 +165,7 @@ bearer_token_env_var = "RESOLVE_API_KEY"
 // Cursor mcp.json — references env vars as ${env:NAME}, not the bare ${NAME}
 "resolve": {
   "type": "http",
-  "url": "https://app0.resolve.ai/mcp/v2",
+  "url": "https://agent.resolve.ai/mcp/v2",
   "headers": { "Authorization": "Bearer ${env:RESOLVE_API_KEY}" }
 }
 ```
@@ -176,7 +176,7 @@ If you only call the Resolve REST API and do not use MCP, no action is needed.
 
 ## Authentication
 
-The MCP transport uses OAuth. On first connect, Claude Code, Codex, Cursor, or Pi discovers Resolve OAuth from `https://app0.resolve.ai/mcp/v2` and prompts you to sign in.
+The MCP transport uses OAuth. On first connect, Claude Code, Codex, Cursor, or Pi discovers Resolve OAuth from `https://agent.resolve.ai/mcp/v2` and prompts you to sign in.
 
 You do not need to generate or export `RESOLVE_API_KEY` for normal plugin usage. Identity and access scope come from the OAuth sign-in.
 
@@ -240,7 +240,7 @@ If you use the plugin in Claude Code, Codex, Cursor, or Pi, you don't need one �
 
 For MCP-only clients or direct REST API access, create a personal API token in Resolve:
 
-1. Sign in to Resolve and open **Personal API Tokens** at `https://app0.resolve.ai/personal-tokens`.
+1. Sign in to Resolve and open **Personal API Tokens** at `https://agent.resolve.ai/personal-tokens`.
 2. Click **Create Personal Token** and copy the value — it's shown only once, so if you lose it you'll need to generate a new one.
 
 Use that token as your `RESOLVE_API_KEY`.
