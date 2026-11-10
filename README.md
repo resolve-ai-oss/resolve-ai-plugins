@@ -188,6 +188,17 @@ cursor://anysphere.cursor-mcp/oauth/callback
 
 If a Resolve deployment whitelists redirect URIs instead of relying only on Dynamic Client Registration, that callback must be registered on the Resolve OAuth app.
 
+### Signing in from a remote machine
+
+On a devbox or over SSH, sign in with `--no-browser`:
+
+```sh
+claude mcp login plugin:resolve-ai:resolve --no-browser   # Claude Code
+codex mcp login resolve --no-browser                      # Codex
+```
+
+Open the printed link on your laptop, choose **On another machine**, then paste the link Resolve shows into the terminal.
+
 ## Skills
 
 | Skill            | Use it for                                                                                            |
